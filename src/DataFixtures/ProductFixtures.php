@@ -10,58 +10,58 @@ class ProductFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // Product 1: Ultra Gaming Mouse
+        // Product 1: Ultra Precision Mouse
         $product1 = new Product();
-        $product1->setName('B2Battle Phantom X1 Ultra Gaming Mouse');
-        $product1->setDescription('🎯 Next-gen esports weapon with 30,000 DPI PixArt sensor, 0.2ms response time, and weightless 59g design. Features RGB Chroma lighting, magnetic scroll wheel, and tournament-grade PTFE feet. Used by world champions in Valorant, CS2, and Apex Legends. Dominate every headshot with precision that defines legends.');
+        $product1->setName('B2Battle Precision X1 Ultra Computer Mouse');
+        $product1->setDescription('🖱️ Professional computer mouse with 30,000 DPI PixArt sensor, 0.2ms response time, and lightweight 59g design. Features RGB lighting, magnetic scroll wheel, and premium PTFE feet. Perfect for professionals, designers, and productivity enthusiasts. Precision that enhances your workflow.');
         $product1->setPrice('5999.00');
         $product1->setImageUrl('https://images.unsplash.com/photo-1527814050087-3793815479db?w=500&h=500&fit=crop&auto=format');
         $manager->persist($product1);
 
         // Product 2: Mechanical Keyboard
         $product2 = new Product();
-        $product2->setName('B2Battle Apex Mechanical Keyboard RGB');
-        $product2->setDescription('⚡ Championship-grade mechanical keyboard with custom Cherry MX Speed switches, per-key RGB lighting, and aircraft-grade aluminum frame. Features 1ms polling rate, N-key rollover, and dedicated macro keys. Hot-swappable switches for ultimate customization. The weapon of choice for esports legends.');
+        $product2->setName('B2Battle Professional Mechanical Keyboard RGB');
+        $product2->setDescription('⌨️ Professional-grade mechanical keyboard with custom Cherry MX switches, per-key RGB lighting, and aircraft-grade aluminum frame. Features 1ms polling rate, N-key rollover, and programmable macro keys. Hot-swappable switches for ultimate customization. Perfect for professionals and enthusiasts.');
         $product2->setPrice('12999.00');
         $product2->setImageUrl('https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=500&h=500&fit=crop&auto=format');
         $manager->persist($product2);
 
-        // Product 3: Gaming Headset
+        // Product 3: Professional Headset
         $product3 = new Product();
-        $product3->setName('B2Battle Vortex Pro Gaming Headset');
-        $product3->setDescription('🎧 Professional 7.1 surround sound headset with 50mm titanium drivers, AI-powered noise cancellation, and crystal-clear boom mic. Features memory foam padding, 20-hour battery life, and multi-platform compatibility. Hear every footstep, dominate every callout. Tournament approved for competitive play.');
+        $product3->setName('B2Battle Professional Audio Headset');
+        $product3->setDescription('🎧 Professional 7.1 surround sound headset with 50mm titanium drivers, AI-powered noise cancellation, and crystal-clear boom mic. Features memory foam padding, 20-hour battery life, and multi-platform compatibility. Perfect for work calls, music, and entertainment. Professional audio quality.');
         $product3->setPrice('8999.00');
         $product3->setImageUrl('https://images.unsplash.com/photo-1599669454699-248893623440?w=500&h=500&fit=crop&auto=format');
         $manager->persist($product3);
 
-        // Product 4: Gaming Monitor
+        // Product 4: Professional Monitor
         $product4 = new Product();
-        $product4->setName('B2Battle Quantum 27" 240Hz Gaming Monitor');
-        $product4->setDescription('🖥️ Ultra-fast 27" QHD gaming monitor with 240Hz refresh rate, 0.5ms response time, and HDR1000 support. Features NVIDIA G-Sync Ultimate, quantum dot technology, and height-adjustable stand. Experience buttery-smooth gameplay with colors that pop. The display that separates pros from amateurs.');
+        $product4->setName('B2Battle Professional 27" 240Hz Monitor');
+        $product4->setDescription('🖥️ Ultra-fast 27" QHD professional monitor with 240Hz refresh rate, 0.5ms response time, and HDR1000 support. Features NVIDIA G-Sync, quantum dot technology, and height-adjustable stand. Experience smooth performance with vibrant colors. Perfect for professionals and content creators.');
         $product4->setPrice('34999.00');
         $product4->setImageUrl('https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&h=500&fit=crop&auto=format');
         $manager->persist($product4);
 
-        // Product 5: Gaming Chair
+        // Product 5: Ergonomic Office Chair
         $product5 = new Product();
-        $product5->setName('B2Battle Throne Elite Gaming Chair');
-        $product5->setDescription('🪑 Ergonomic gaming throne with 4D armrests, memory foam lumbar support, and premium PU leather. Features 180° recline, 360° swivel, and supports up to 180kg. Built for marathon gaming sessions with superior comfort and style. The chair that keeps champions comfortable during clutch moments.');
+        $product5->setName('B2Battle Elite Ergonomic Office Chair');
+        $product5->setDescription('🪑 Ergonomic office chair with 4D armrests, memory foam lumbar support, and premium PU leather. Features 180° recline, 360° swivel, and supports up to 180kg. Built for long work sessions with superior comfort and style. Perfect for professionals who value comfort.');
         $product5->setPrice('24999.00');
         $product5->setImageUrl('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&h=500&fit=crop&auto=format');
         $manager->persist($product5);
 
-        // Product 6: Gaming Controller
+        // Product 6: Wireless Controller
         $product6 = new Product();
-        $product6->setName('B2Battle Elite Wireless Pro Controller');
-        $product6->setDescription('🎮 Tournament-grade wireless controller with Hall Effect triggers, anti-drift sticks, and 50-hour battery life. Features customizable RGB, hair triggers, and pro-level button mapping. Compatible with PC, Xbox, and mobile. The controller that gives you the edge in every game mode.');
+        $product6->setName('B2Battle Elite Wireless Controller');
+        $product6->setDescription('🎮 Professional wireless controller with Hall Effect triggers, anti-drift sticks, and 50-hour battery life. Features customizable RGB, programmable buttons, and advanced button mapping. Compatible with PC, Xbox, and mobile devices. Perfect for entertainment and productivity.');
         $product6->setPrice('9999.00');
         $product6->setImageUrl('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=500&h=500&fit=crop&auto=format');
         $manager->persist($product6);
 
-        // Product 7: Gaming Laptop
+        // Product 7: High-Performance Laptop
         $product7 = new Product();
-        $product7->setName('B2Battle Titan Gaming Laptop RTX 4080');
-        $product7->setDescription('💻 Beast mode activated! Intel i9-13900HX, RTX 4080, 32GB DDR5, 1TB NVMe SSD. Features 17.3" 240Hz display, RGB mechanical keyboard, and advanced cooling system. Portable powerhouse for gaming anywhere. Stream, compete, and dominate with desktop-level performance on the go.');
+        $product7->setName('B2Battle Professional Laptop RTX 4080');
+        $product7->setDescription('💻 High-performance laptop with Intel i9-13900HX, RTX 4080, 32GB DDR5, 1TB NVMe SSD. Features 17.3" 240Hz display, mechanical keyboard, and advanced cooling system. Portable powerhouse for professionals, creators, and power users. Desktop-level performance on the go.');
         $product7->setPrice('189999.00');
         $product7->setImageUrl('https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&h=500&fit=crop&auto=format');
         $manager->persist($product7);

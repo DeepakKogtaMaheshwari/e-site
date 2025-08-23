@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Victory! Payment Successful - B2Battle{% endblock %}
+{% block title %}Success! Payment Successful - B2Battle{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -21,7 +21,7 @@
                 </h1>
                 <h4 class="text-success mb-4">Payment Successful!</h4>
                 <p class="text-white-50 mb-4 fs-5">
-                    🎮 Your battle gear is on its way! Get ready to dominate the competition with your new equipment.
+                    📦 Your electronics are on their way! Get ready to enhance your productivity with your new equipment.
                 </p>
 
                 {% if payment_id %}
@@ -44,7 +44,7 @@
                 <!-- Order Status -->
                 <div class="mb-4">
                     <h5 class="text-white mb-3">
-                        <i class="bi bi-list-check me-2"></i>Your Battle Plan
+                        <i class="bi bi-list-check me-2"></i>Your Order Status
                     </h5>
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -70,7 +70,7 @@
                                 <i class="bi bi-hourglass-split text-warning me-3" style="font-size: 1.2rem;"></i>
                                 <div class="text-start">
                                     <div class="text-white fw-bold">Preparing</div>
-                                    <small class="text-white-50">Gear being prepared for battle</small>
+                                    <small class="text-white-50">Products being prepared for shipping</small>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
                     <a href="{{ path('app_products') }}" class="btn btn-modern btn-lg">
                         <i class="bi bi-grid-3x3-gap-fill me-2"></i>
-                        Continue Battle Shopping
+                        Continue Shopping
                     </a>
                     <a href="{{ path('app_home') }}" class="btn btn-outline-light btn-lg rounded-pill">
                         <i class="bi bi-house-fill me-2"></i>
@@ -113,7 +113,7 @@
                         <div class="col-md-4">
                             <div class="text-center">
                                 <i class="bi bi-people-fill text-info mb-2" style="font-size: 1.5rem;"></i>
-                                <div class="text-white-50 small">Gaming Community Access</div>
+                                <div class="text-white-50 small">Customer Community Access</div>
                             </div>
                         </div>
                         <div class="col-md-4">

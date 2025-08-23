@@ -47,7 +47,7 @@
             </h1>
 
             <p class="text-lg text-gray-400 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 0.2s;">
-                Complete your purchase with confidence. Protected by military-grade encryption and trusted by champions worldwide.
+                Complete your purchase with confidence. Protected by industry-standard encryption and trusted by customers worldwide.
             </p>
         </div>
     </div>
@@ -208,7 +208,7 @@
                             <span class="text-white">Included</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Champion Discount:</span>
+                            <span class="text-gray-400">Customer Discount:</span>
                             <span class="text-neon-yellow font-bold flex items-center">
                                 <i data-lucide="gift" class="w-4 h-4 mr-1"></i>
                                 Applied
@@ -324,8 +324,8 @@ document.getElementById('rzp-button').onclick = function(e) {
         "key": "{{ razorpay_key_id }}",
         "amount": paymentAmount, // Amount in paise (includes tax and shipping)
         "currency": "INR",
-        "name": "B2Battle Gaming",
-        "description": "{{ product.name }} - Professional Gaming Gear (Qty: " + currentQuantity + ")",
+        "name": "B2Battle Electronics",
+        "description": "{{ product.name }} - Professional Electronics (Qty: " + currentQuantity + ")",
         "image": "{{ product.imageUrl ?? '' }}",
         "order_id": "", // This should be generated from your backend
         "handler": function (response) {
@@ -350,7 +350,7 @@ document.getElementById('rzp-button').onclick = function(e) {
             }, 2000);
         },
         "prefill": {
-            "name": "Gaming Champion",
+            "name": "Customer",
             "email": "bittuminati99@gmail.com",
             "contact": "9801483755"
         },

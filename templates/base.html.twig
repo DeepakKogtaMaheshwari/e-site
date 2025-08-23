@@ -2,10 +2,10 @@
 <html lang="en" class="scroll-smooth">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}B2Battle - Next-Gen Gaming Arsenal{% endblock %}</title>
+        <title>{% block title %}B2Battle - Professional Electronics Store{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚔️</text></svg>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="B2Battle - Next-generation gaming gear and esports equipment. Dominate with cutting-edge tech, lightning-fast delivery, and pro-level support.">
+        <meta name="description" content="B2Battle - Professional electronics and computer accessories store. Premium quality products with cutting-edge technology, fast delivery, and excellent customer support.">
 
         <!-- Tailwind CSS -->
         <script src="https://cdn.tailwindcss.com"></script>
@@ -274,7 +274,7 @@
                             </a>
                             <a href="{{ path('app_products') }}" class="group flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-300 hover:text-white transition-all duration-300 hover:bg-white/10">
                                 <i data-lucide="gamepad-2" class="w-4 h-4"></i>
-                                <span class="font-medium">Arsenal</span>
+                                <span class="font-medium">Products</span>
                                 <div class="w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-neon-purple to-neon-pink transition-all duration-300"></div>
                             </a>
                             <a href="{{ path('app_contact') }}" class="group flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-300 hover:text-white transition-all duration-300 hover:bg-white/10">
@@ -352,11 +352,11 @@
                         </a>
                         <a href="{{ path('app_products') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group">
                             <i data-lucide="gamepad-2" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-medium">Gaming Arsenal</span>
+                            <span class="font-medium">Electronics Store</span>
                         </a>
                         <a href="{{ path('app_contact') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group">
                             <i data-lucide="headphones" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-medium">Battle Support</span>
+                            <span class="font-medium">Customer Support</span>
                         </a>
                     </div>
 
@@ -408,7 +408,7 @@
                             </span>
                         </div>
                         <p class="text-gray-400 text-lg mb-6 max-w-md">
-                            Next-generation gaming arsenal for champions. Dominate every battle with cutting-edge gear and pro-level performance.
+                            Professional electronics store for modern professionals. Enhance your productivity with cutting-edge technology and premium quality products.
                         </p>
                         <div class="flex space-x-4">
                             <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-neon-purple/20 transition-all duration-300 group">
@@ -439,7 +439,7 @@
                             <li>
                                 <a href="{{ path('app_products') }}" class="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors duration-300 group">
                                     <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                                    <span>Gaming Arsenal</span>
+                                    <span>Electronics Store</span>
                                 </a>
                             </li>
                             <li>
@@ -495,7 +495,7 @@
                 <!-- Bottom Bar -->
                 <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                     <div class="text-gray-400 text-sm">
-                        © {{ 'now'|date('Y') }} B2Battle. All rights reserved. Built for champions.
+                        © {{ 'now'|date('Y') }} B2Battle. All rights reserved. Professional electronics store.
                     </div>
                     <div class="flex items-center space-x-2 text-gray-400 text-sm">
                         <i data-lucide="shield-check" class="w-4 h-4 text-neon-green"></i>
@@ -945,7 +945,7 @@
                         <div class="modal-content glass-morphism rounded-3xl p-8 max-w-3xl w-full max-h-[85vh] overflow-y-auto transform scale-95 opacity-0 transition-all duration-300">
                             <div class="flex justify-between items-center mb-6">
                                 <div>
-                                    <h2 class="text-2xl font-bold text-white">Your Battle Cart</h2>
+                                    <h2 class="text-2xl font-bold text-white">Your Shopping Cart</h2>
                                     <p class="text-gray-400">${itemCount} item${itemCount !== 1 ? 's' : ''} • ₹${total.toLocaleString()}</p>
                                 </div>
                                 <button class="close-modal w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-colors">
@@ -972,10 +972,10 @@
                                 <i data-lucide="shopping-cart" class="w-10 h-10 text-white"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-3">Your cart is empty</h3>
-                            <p class="text-gray-400 mb-6">Ready to build your ultimate gaming setup?</p>
+                            <p class="text-gray-400 mb-6">Ready to build your professional workspace?</p>
                             <a href="{{ path('app_products') }}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-semibold hover:shadow-neon-lg transition-all duration-300">
                                 <i data-lucide="gamepad-2" class="w-5 h-5 mr-2"></i>
-                                <span>Explore Gaming Gear</span>
+                                <span>Shop Electronics</span>
                             </a>
                         </div>
                     `;
@@ -1365,7 +1365,7 @@
                             <div class="glass-morphism rounded-3xl p-8 w-full max-w-2xl">
                                 <div class="flex items-center space-x-4 mb-6">
                                     <i data-lucide="search" class="w-6 h-6 text-gray-400"></i>
-                                    <input type="text" id="global-search" placeholder="Search gaming gear..." class="flex-1 bg-transparent text-white text-xl placeholder-gray-400 border-none outline-none">
+                                    <input type="text" id="global-search" placeholder="Search electronics..." class="flex-1 bg-transparent text-white text-xl placeholder-gray-400 border-none outline-none">
                                     <button id="close-search" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-colors">
                                         <i data-lucide="x" class="w-5 h-5"></i>
                                     </button>
@@ -1443,11 +1443,11 @@
 
                 getMockResults(query) {
                     const allProducts = [
-                        { id: 1, name: 'B2Battle Phantom X1 Ultra Gaming Mouse', price: 5999, image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=100&h=100&fit=crop' },
-                        { id: 2, name: 'B2Battle Apex Mechanical Keyboard RGB', price: 12999, image: 'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=100&h=100&fit=crop' },
-                        { id: 3, name: 'B2Battle Vortex Pro Gaming Headset', price: 8999, image: 'https://images.unsplash.com/photo-1599669454699-248893623440?w=100&h=100&fit=crop' },
-                        { id: 4, name: 'B2Battle Quantum 27" 240Hz Gaming Monitor', price: 34999, image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=100&h=100&fit=crop' },
-                        { id: 5, name: 'B2Battle Throne Elite Gaming Chair', price: 24999, image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=100&h=100&fit=crop' }
+                        { id: 1, name: 'B2Battle Precision X1 Ultra Computer Mouse', price: 5999, image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=100&h=100&fit=crop' },
+                        { id: 2, name: 'B2Battle Professional Mechanical Keyboard RGB', price: 12999, image: 'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=100&h=100&fit=crop' },
+                        { id: 3, name: 'B2Battle Professional Audio Headset', price: 8999, image: 'https://images.unsplash.com/photo-1599669454699-248893623440?w=100&h=100&fit=crop' },
+                        { id: 4, name: 'B2Battle Professional 27" 240Hz Monitor', price: 34999, image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=100&h=100&fit=crop' },
+                        { id: 5, name: 'B2Battle Elite Ergonomic Office Chair', price: 24999, image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=100&h=100&fit=crop' }
                     ];
 
                     return allProducts.filter(product =>
@@ -1461,7 +1461,7 @@
                         resultsContainer.innerHTML = `
                             <div class="flex items-center justify-center py-8">
                                 <div class="animate-spin w-6 h-6 border-2 border-neon-purple border-t-transparent rounded-full mr-3"></div>
-                                <span class="text-gray-400">Searching gaming gear...</span>
+                                <span class="text-gray-400">Searching electronics...</span>
                             </div>
                         `;
                     }
@@ -1475,7 +1475,7 @@
                         resultsContainer.innerHTML = `
                             <div class="text-center py-8">
                                 <i data-lucide="search-x" class="w-12 h-12 text-gray-400 mx-auto mb-3"></i>
-                                <p class="text-gray-400">No gaming gear found</p>
+                                <p class="text-gray-400">No electronics found</p>
                             </div>
                         `;
                         lucide.createIcons();
@@ -1993,7 +1993,7 @@
                 console.log('🎮 B2Battle Real-time System Ready!');
                 console.log('⚡ Features: Cart, Wishlist, Search, Compare, Mobile-Optimized');
                 console.log('🛡️ Security: XSS Protection, Input Validation, Secure Storage');
-                console.log('📱 Mobile: Touch-Optimized, Responsive, PWA-Ready');
+                console.log('📱 Mobile: Touch-Optimized, Responsive, Professional');
             });
 
             // Enhanced Navigation Features
@@ -2108,10 +2108,10 @@
                                 <i data-lucide="heart" class="w-10 h-10 text-white"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-3">Your wishlist is empty</h3>
-                            <p class="text-gray-400 mb-6">Save your favorite gaming gear for later!</p>
+                            <p class="text-gray-400 mb-6">Save your favorite electronics for later!</p>
                             <a href="{{ path('app_products') }}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-semibold hover:shadow-neon-lg transition-all duration-300">
                                 <i data-lucide="gamepad-2" class="w-5 h-5 mr-2"></i>
-                                <span>Explore Gaming Gear</span>
+                                <span>Shop Electronics</span>
                             </a>
                         </div>
                     `;
