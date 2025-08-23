@@ -3,145 +3,486 @@
 {% block title %}Contact B2Battle Support - Gaming Experts{% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10 mx-auto">
-            <!-- Page Header -->
-            <div class="modern-card p-4 text-center mb-5" data-aos="fade-down">
-                <nav aria-label="breadcrumb" class="mb-3">
-                    <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{ path('app_home') }}" class="text-white-50 text-decoration-none">
-                                <i class="bi bi-house-fill me-1"></i>Home
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item active text-white">
-                            <i class="bi bi-headset me-1"></i>Contact Support
-                        </li>
-                    </ol>
-                </nav>
-                <h1 class="display-5 fw-bold text-white mb-3 brand-font">
-                    <i class="bi bi-headset me-3"></i>Gaming Support HQ
-                </h1>
-                <p class="lead text-white-50 mb-0">
-                    Our gaming experts are ready to help you dominate! Get personalized support for all your battle gear needs.
-                </p>
+<!-- Hero Section -->
+<section class="relative min-h-screen pt-20 pb-16 overflow-hidden">
+    <!-- Animated Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div class="absolute inset-0 bg-mesh opacity-30"></div>
+        <div class="absolute top-20 left-10 w-72 h-72 bg-neon-purple/20 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-neon-pink/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-neon-blue/20 rounded-full blur-3xl animate-float" style="animation-delay: -4s;"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center space-x-2 text-sm mb-8" data-aos="fade-down">
+            <a href="{{ path('app_home') }}" class="text-gray-400 hover:text-white transition-colors flex items-center space-x-1">
+                <i data-lucide="home" class="w-4 h-4"></i>
+                <span>Home</span>
+            </a>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-500"></i>
+            <span class="text-white font-medium flex items-center space-x-1">
+                <i data-lucide="headphones" class="w-4 h-4"></i>
+                <span>Battle Support</span>
+            </span>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="text-center mb-16" data-aos="fade-up">
+            <div class="inline-flex items-center space-x-3 px-6 py-3 bg-white/10 rounded-full backdrop-blur-sm border border-white/20 mb-6">
+                <div class="w-8 h-8 bg-gradient-to-r from-neon-green to-neon-blue rounded-full flex items-center justify-center">
+                    <i data-lucide="headphones" class="w-4 h-4 text-white"></i>
+                </div>
+                <span class="text-white font-semibold">24/7 Gaming Support</span>
             </div>
 
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">Send us a Message</h5>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-neon-purple via-neon-pink to-neon-blue bg-clip-text text-transparent">
+                    Battle Support HQ
+                </span>
+            </h1>
+
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Our gaming experts are ready to help you dominate! Get personalized support for all your battle gear needs and level up your gaming experience.
+            </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            <!-- Contact Form -->
+            <div class="lg:col-span-2" data-aos="fade-right">
+                <div class="glass-morphism rounded-3xl p-8 border border-white/10">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl flex items-center justify-center">
+                            <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">Send us a Message</h2>
+                            <p class="text-gray-400">Get expert gaming support in minutes</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" required>
-                                </div>
+
+                    <form id="contact-form" class="space-y-6">
+                        <!-- Name Fields -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="firstName" class="block text-sm font-semibold text-white">
+                                    First Name <span class="text-red-400">*</span>
+                                </label>
+                                <input type="text"
+                                       id="firstName"
+                                       name="firstName"
+                                       required
+                                       class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neon-purple focus:border-transparent transition-all duration-300"
+                                       placeholder="Enter your first name">
                             </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" required>
+                            <div class="space-y-2">
+                                <label for="lastName" class="block text-sm font-semibold text-white">
+                                    Last Name <span class="text-red-400">*</span>
+                                </label>
+                                <input type="text"
+                                       id="lastName"
+                                       name="lastName"
+                                       required
+                                       class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neon-purple focus:border-transparent transition-all duration-300"
+                                       placeholder="Enter your last name">
                             </div>
-                            <div class="mb-3">
-                                <label for="subject" class="form-label">Subject</label>
-                                <select class="form-select" id="subject" required>
-                                    <option value="">Choose a subject...</option>
-                                    <option value="order">Order Inquiry</option>
-                                    <option value="return">Return/Refund</option>
-                                    <option value="product">Product Question</option>
-                                    <option value="technical">Technical Support</option>
-                                    <option value="other">Other</option>
-                                </select>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="space-y-2">
+                            <label for="email" class="block text-sm font-semibold text-white">
+                                Email Address <span class="text-red-400">*</span>
+                            </label>
+                            <input type="email"
+                                   id="email"
+                                   name="email"
+                                   required
+                                   class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neon-purple focus:border-transparent transition-all duration-300"
+                                   placeholder="your.email@example.com">
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="space-y-2">
+                            <label for="subject" class="block text-sm font-semibold text-white">
+                                Subject <span class="text-red-400">*</span>
+                            </label>
+                            <select id="subject"
+                                    name="subject"
+                                    required
+                                    class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-neon-purple focus:border-transparent transition-all duration-300">
+                                <option value="" class="bg-gray-800">Choose a subject...</option>
+                                <option value="order" class="bg-gray-800">🛒 Order Inquiry</option>
+                                <option value="return" class="bg-gray-800">↩️ Return/Refund</option>
+                                <option value="product" class="bg-gray-800">🎮 Product Question</option>
+                                <option value="technical" class="bg-gray-800">🔧 Technical Support</option>
+                                <option value="partnership" class="bg-gray-800">🤝 Partnership</option>
+                                <option value="feedback" class="bg-gray-800">💭 Feedback</option>
+                                <option value="other" class="bg-gray-800">📝 Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="space-y-2">
+                            <label for="message" class="block text-sm font-semibold text-white">
+                                Message <span class="text-red-400">*</span>
+                            </label>
+                            <textarea id="message"
+                                      name="message"
+                                      rows="6"
+                                      required
+                                      class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neon-purple focus:border-transparent transition-all duration-300 resize-none"
+                                      placeholder="Please describe your inquiry in detail... The more information you provide, the better we can assist you!"></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit"
+                                id="submit-btn"
+                                class="w-full py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-bold hover:shadow-neon-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                            <span>Send Message</span>
+                        </button>
+
+                        <!-- Success Message -->
+                        <div id="success-message" class="hidden p-4 bg-green-500/20 border border-green-500/30 rounded-xl">
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                                <span class="text-green-400 font-semibold">Message sent successfully! We'll get back to you within 24 hours.</span>
                             </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" rows="5" required placeholder="Please describe your inquiry in detail..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">
-                                <svg width="16" height="16" fill="currentColor" class="bi bi-send me-2" viewBox="0 0 16 16">
-                                    <path d="M15.854.146a.5.5 0 0 1 .11.54L13.026 8.5l2.938 7.814a.5.5 0 0 1-.11.54.5.5 0 0 1-.54.11L8.5 13.026 .686 15.964a.5.5 0 0 1-.54-.11.5.5 0 0 1-.11-.54L2.974 7.5.036-.314a.5.5 0 0 1 .11-.54.5.5 0 0 1 .54-.11L8.5 2.974 15.314.036a.5.5 0 0 1 .54.11z"/>
-                                </svg>
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">Get in Touch</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-4">
-                            <h6 class="text-white">
-                                <i class="bi bi-envelope-fill me-2"></i>
-                                Gaming Support Email
-                            </h6>
-                            <p class="text-white-50">bittuminati99@gmail.com</p>
-                            <p class="text-white-50">support@b2battle.com</p>
-                        </div>
 
-                        <div class="mb-4">
-                            <h6 class="text-white">
-                                <i class="bi bi-telephone-fill me-2"></i>
-                                24/7 Gaming Hotline
-                            </h6>
-                            <p class="text-white-50">+91 9801483755</p>
-                            <p class="text-white-50">+91 9801483755 (WhatsApp)</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <h6 class="text-white">
-                                <i class="bi bi-clock-fill me-2"></i>
-                                Battle Support Hours
-                            </h6>
-                            <p class="text-white-50">
-                                <strong>Gaming Support:</strong> 24/7<br>
-                                <strong>Sales Team:</strong> 9:00 AM - 11:00 PM<br>
-                                <strong>Technical Support:</strong> 10:00 AM - 10:00 PM<br>
-                                <small class="text-warning">⚡ Express support for premium members</small>
-                            </p>
-                        </div>
-
-                        <div class="mb-4">
-                            <h6 class="text-white">
-                                <i class="bi bi-geo-alt-fill me-2"></i>
-                                Battle HQ Location
-                            </h6>
-                            <p class="text-white-50">
-                                B2Battle Gaming Center<br>
-                                Patna, Bihar<br>
-                                India - 800001<br>
-                                Near Gandhi Maidan
-                            </p>
-                        </div>
-
-                        <div>
-                            <h6 class="text-white">
-                                <i class="bi bi-chat-dots-fill me-2"></i>
-                                Social Gaming
-                            </h6>
-                            <div class="d-flex gap-3">
-                                <a href="#" class="text-white-50 fs-4"><i class="bi bi-discord"></i></a>
-                                <a href="#" class="text-white-50 fs-4"><i class="bi bi-twitch"></i></a>
-                                <a href="#" class="text-white-50 fs-4"><i class="bi bi-youtube"></i></a>
-                                <a href="#" class="text-white-50 fs-4"><i class="bi bi-instagram"></i></a>
+            <!-- Contact Information -->
+            <div class="lg:col-span-1" data-aos="fade-left">
+                <div class="space-y-6">
+                    <!-- Get in Touch Header -->
+                    <div class="glass-morphism rounded-3xl p-6 border border-white/10">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-r from-neon-green to-neon-blue rounded-xl flex items-center justify-center">
+                                <i data-lucide="phone" class="w-5 h-5 text-white"></i>
                             </div>
+                            <h3 class="text-xl font-bold text-white">Get in Touch</h3>
+                        </div>
+
+                        <!-- Gaming Support Email -->
+                        <div class="mb-6">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-8 h-8 bg-neon-purple/20 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="mail" class="w-4 h-4 text-neon-purple"></i>
+                                </div>
+                                <h4 class="font-semibold text-white">Gaming Support Email</h4>
+                            </div>
+                            <div class="space-y-1 ml-11">
+                                <a href="mailto:bittuminati99@gmail.com" class="block text-gray-300 hover:text-neon-purple transition-colors">
+                                    bittuminati99@gmail.com
+                                </a>
+                                <a href="mailto:support@b2battle.com" class="block text-gray-300 hover:text-neon-purple transition-colors">
+                                    support@b2battle.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 24/7 Gaming Hotline -->
+                        <div class="mb-6">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-8 h-8 bg-neon-green/20 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="phone" class="w-4 h-4 text-neon-green"></i>
+                                </div>
+                                <h4 class="font-semibold text-white">24/7 Gaming Hotline</h4>
+                            </div>
+                            <div class="space-y-1 ml-11">
+                                <a href="tel:+919801483755" class="block text-gray-300 hover:text-neon-green transition-colors">
+                                    +91 9801483755
+                                </a>
+                                <a href="https://wa.me/919801483755" class="flex items-center space-x-2 text-gray-300 hover:text-neon-green transition-colors">
+                                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                                    <span>+91 9801483755 (WhatsApp)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Battle Support Hours -->
+                        <div class="mb-6">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-8 h-8 bg-neon-blue/20 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-4 h-4 text-neon-blue"></i>
+                                </div>
+                                <h4 class="font-semibold text-white">Battle Support Hours</h4>
+                            </div>
+                            <div class="space-y-2 ml-11 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Gaming Support:</span>
+                                    <span class="text-neon-green font-semibold">24/7</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Sales Team:</span>
+                                    <span class="text-white">9:00 AM - 11:00 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Technical Support:</span>
+                                    <span class="text-white">10:00 AM - 10:00 PM</span>
+                                </div>
+                                <div class="mt-3 p-2 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+                                    <span class="text-yellow-400 text-xs font-semibold">⚡ Express support for premium members</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Battle HQ Location -->
+                        <div>
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-8 h-8 bg-neon-pink/20 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-neon-pink"></i>
+                                </div>
+                                <h4 class="font-semibold text-white">Battle HQ Location</h4>
+                            </div>
+                            <div class="ml-11 text-gray-300">
+                                <p class="font-semibold text-white">B2Battle Gaming Center</p>
+                                <p>Patna, Bihar</p>
+                                <p>India</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Gaming -->
+                    <div class="glass-morphism rounded-3xl p-6 border border-white/10">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-r from-neon-pink to-neon-purple rounded-xl flex items-center justify-center">
+                                <i data-lucide="users" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Social Gaming</h3>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="#" class="flex items-center space-x-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">
+                                <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="message-square" class="w-4 h-4 text-white"></i>
+                                </div>
+                                <span class="text-gray-300 group-hover:text-white transition-colors text-sm">Discord</span>
+                            </a>
+
+                            <a href="#" class="flex items-center space-x-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">
+                                <div class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="video" class="w-4 h-4 text-white"></i>
+                                </div>
+                                <span class="text-gray-300 group-hover:text-white transition-colors text-sm">Twitch</span>
+                            </a>
+
+                            <a href="#" class="flex items-center space-x-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">
+                                <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="play" class="w-4 h-4 text-white"></i>
+                                </div>
+                                <span class="text-gray-300 group-hover:text-white transition-colors text-sm">YouTube</span>
+                            </a>
+
+                            <a href="#" class="flex items-center space-x-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">
+                                <div class="w-8 h-8 bg-pink-500 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="camera" class="w-4 h-4 text-white"></i>
+                                </div>
+                                <span class="text-gray-300 group-hover:text-white transition-colors text-sm">Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="glass-morphism rounded-3xl p-6 border border-white/10">
+                        <h3 class="text-lg font-bold text-white mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <a href="{{ path('app_products') }}" class="flex items-center space-x-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">
+                                <i data-lucide="shopping-bag" class="w-5 h-5 text-neon-purple"></i>
+                                <span class="text-gray-300 group-hover:text-white transition-colors">Browse Products</span>
+                            </a>
+
+                            <a href="#" class="flex items-center space-x-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">
+                                <i data-lucide="help-circle" class="w-5 h-5 text-neon-blue"></i>
+                                <span class="text-gray-300 group-hover:text-white transition-colors">FAQ & Help</span>
+                            </a>
+
+                            <a href="#" class="flex items-center space-x-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">
+                                <i data-lucide="truck" class="w-5 h-5 text-neon-green"></i>
+                                <span class="text-gray-300 group-hover:text-white transition-colors">Track Order</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Contact Form JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const successMessage = document.getElementById('success-message');
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Form submission handler
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+
+        // Validate form
+        if (!validateForm(data)) {
+            return;
+        }
+
+        // Show loading state
+        showLoadingState();
+
+        // Simulate form submission (replace with actual API call)
+        setTimeout(() => {
+            // Show success message
+            showSuccessMessage();
+
+            // Reset form
+            contactForm.reset();
+
+            // Reset button state
+            resetButtonState();
+
+            // Show notification
+            if (window.B2Battle?.notifications) {
+                window.B2Battle.notifications.show('Message sent successfully! We\'ll get back to you soon.', 'success');
+            }
+        }, 2000);
+    });
+
+    function validateForm(data) {
+        const requiredFields = ['firstName', 'lastName', 'email', 'subject', 'message'];
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+            const input = document.getElementById(field);
+            const value = data[field]?.trim();
+
+            if (!value) {
+                showFieldError(input, 'This field is required');
+                isValid = false;
+            } else {
+                clearFieldError(input);
+            }
+        });
+
+        // Email validation
+        if (data.email && !isValidEmail(data.email)) {
+            showFieldError(document.getElementById('email'), 'Please enter a valid email address');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function showFieldError(input, message) {
+        clearFieldError(input);
+
+        input.classList.add('border-red-500', 'focus:ring-red-500');
+        input.classList.remove('border-white/20', 'focus:ring-neon-purple');
+
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'text-red-400 text-sm mt-1 field-error';
+        errorDiv.textContent = message;
+
+        input.parentNode.appendChild(errorDiv);
+    }
+
+    function clearFieldError(input) {
+        input.classList.remove('border-red-500', 'focus:ring-red-500');
+        input.classList.add('border-white/20', 'focus:ring-neon-purple');
+
+        const existingError = input.parentNode.querySelector('.field-error');
+        if (existingError) {
+            existingError.remove();
+        }
+    }
+
+    function showLoadingState() {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+            <div class="flex items-center justify-center space-x-2">
+                <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>Sending...</span>
+            </div>
+        `;
+    }
+
+    function resetButtonState() {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+            <i data-lucide="send" class="w-5 h-5"></i>
+            <span>Send Message</span>
+        `;
+        lucide.createIcons();
+    }
+
+    function showSuccessMessage() {
+        successMessage.classList.remove('hidden');
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+            successMessage.classList.add('hidden');
+        }, 5000);
+    }
+
+    // Real-time validation
+    const inputs = contactForm.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.value.trim()) {
+                clearFieldError(this);
+            }
+        });
+
+        input.addEventListener('input', function() {
+            if (this.classList.contains('border-red-500')) {
+                clearFieldError(this);
+            }
+        });
+    });
+
+    // Auto-resize textarea
+    const messageTextarea = document.getElementById('message');
+    messageTextarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    });
+
+    // Add smooth animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('[data-aos]').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease-out';
+        observer.observe(el);
+    });
+});
+</script>
 {% endblock %}
