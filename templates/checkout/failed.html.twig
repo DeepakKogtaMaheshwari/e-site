@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Battle Interrupted - Payment Failed | B2Battle{% endblock %}
+
+{% block body %}
+<!-- Ultra Modern Failed Payment Page -->
+<section class="py-24 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-gradient-to-r from-red-900/20 via-transparent to-orange-900/20"></div>
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-red-500/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-500/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-morphism rounded-3xl p-8 md:p-12 text-center animate-scale-in">
+            <!-- Failed Animation -->
+            <div class="mb-8">
+                <div class="relative inline-flex items-center justify-center w-32 h-32 mb-6">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-full animate-pulse"></div>
+                    <div class="relative w-24 h-24 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center">
+                        <i data-lucide="x-circle" class="w-12 h-12 text-white"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Failed Message -->
+            <h1 class="font-display font-bold text-4xl md:text-6xl mb-4">
+                <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Battle
+                </span>
+                <br>
+                <span class="bg-gradient-to-r from-red-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
+                    Interrupted!
+                </span>
+            </h1>
+            <h3 class="text-red-400 mb-6 text-xl">Payment Failed</h3>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                {{ error|default('Your payment could not be processed. Don\'t worry, no charges were made to your account.') }}
+            </p>
+
+            <!-- Error Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Common Reasons -->
+                <div class="glass-dark rounded-2xl p-6">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 mr-2 text-orange-400"></i>
+                        Common Reasons
+                    </h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center">
+                            <i data-lucide="circle" class="w-2 h-2 mr-3 text-red-400"></i>
+                            Insufficient funds in account
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="circle" class="w-2 h-2 mr-3 text-red-400"></i>
+                            Incorrect card details
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="circle" class="w-2 h-2 mr-3 text-red-400"></i>
+                            Network connectivity issues
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="circle" class="w-2 h-2 mr-3 text-red-400"></i>
+                            Payment cancelled by user
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="circle" class="w-2 h-2 mr-3 text-red-400"></i>
+                            Bank declined transaction
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Quick Solutions -->
+                <div class="glass-dark rounded-2xl p-6">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                        <i data-lucide="lightbulb" class="w-5 h-5 mr-2 text-yellow-400"></i>
+                        Quick Solutions
+                    </h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center">
+                            <i data-lucide="check-circle" class="w-4 h-4 mr-3 text-green-400"></i>
+                            Verify card details and try again
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check-circle" class="w-4 h-4 mr-3 text-green-400"></i>
+                            Check account balance
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check-circle" class="w-4 h-4 mr-3 text-green-400"></i>
+                            Try different payment method
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check-circle" class="w-4 h-4 mr-3 text-green-400"></i>
+                            Contact your bank
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check-circle" class="w-4 h-4 mr-3 text-green-400"></i>
+                            Reach out to our support
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <button onclick="history.back()" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-bold text-lg hover:shadow-neon-lg transition-all duration-300 group">
+                    <span class="flex items-center space-x-3">
+                        <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+                        <span>Try Again</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </span>
+                </button>
+
+                <a href="{{ path('app_products') }}" class="inline-flex items-center px-8 py-4 glass-dark rounded-2xl text-white font-semibold text-lg hover:bg-white/20 transition-all duration-300">
+                    <span class="flex items-center space-x-3">
+                        <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                        <span>Continue Shopping</span>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Support Contact -->
+            <div class="text-center">
+                <p class="text-gray-400 mb-4">Need immediate assistance?</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{{ path('app_contact') }}" class="inline-flex items-center px-6 py-3 bg-white/10 rounded-xl text-white hover:bg-white/20 transition-colors">
+                        <i data-lucide="headphones" class="w-5 h-5 mr-2"></i>
+                        Contact Support
+                    </a>
+                    <a href="tel:+919801483755" class="inline-flex items-center px-6 py-3 bg-white/10 rounded-xl text-white hover:bg-white/20 transition-colors">
+                        <i data-lucide="phone" class="w-5 h-5 mr-2"></i>
+                        Call: +91 9801483755
+                    </a>
+                    <a href="mailto:bittuminati99@gmail.com" class="inline-flex items-center px-6 py-3 bg-white/10 rounded-xl text-white hover:bg-white/20 transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                        Email Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Initialize Lucide Icons
+lucide.createIcons();
+</script>
+{% endblock %}

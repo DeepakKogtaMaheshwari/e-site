@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact B2Battle Support - Gaming Experts{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Page Header -->
+            <div class="modern-card p-4 text-center mb-5" data-aos="fade-down">
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{ path('app_home') }}" class="text-white-50 text-decoration-none">
+                                <i class="bi bi-house-fill me-1"></i>Home
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active text-white">
+                            <i class="bi bi-headset me-1"></i>Contact Support
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="display-5 fw-bold text-white mb-3 brand-font">
+                    <i class="bi bi-headset me-3"></i>Gaming Support HQ
+                </h1>
+                <p class="lead text-white-50 mb-0">
+                    Our gaming experts are ready to help you dominate! Get personalized support for all your battle gear needs.
+                </p>
+            </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Send us a Message</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <select class="form-select" id="subject" required>
+                                    <option value="">Choose a subject...</option>
+                                    <option value="order">Order Inquiry</option>
+                                    <option value="return">Return/Refund</option>
+                                    <option value="product">Product Question</option>
+                                    <option value="technical">Technical Support</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required placeholder="Please describe your inquiry in detail..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-send me-2" viewBox="0 0 16 16">
+                                    <path d="M15.854.146a.5.5 0 0 1 .11.54L13.026 8.5l2.938 7.814a.5.5 0 0 1-.11.54.5.5 0 0 1-.54.11L8.5 13.026 .686 15.964a.5.5 0 0 1-.54-.11.5.5 0 0 1-.11-.54L2.974 7.5.036-.314a.5.5 0 0 1 .11-.54.5.5 0 0 1 .54-.11L8.5 2.974 15.314.036a.5.5 0 0 1 .54.11z"/>
+                                </svg>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Get in Touch</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h6 class="text-white">
+                                <i class="bi bi-envelope-fill me-2"></i>
+                                Gaming Support Email
+                            </h6>
+                            <p class="text-white-50">bittuminati99@gmail.com</p>
+                            <p class="text-white-50">support@b2battle.com</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6 class="text-white">
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                24/7 Gaming Hotline
+                            </h6>
+                            <p class="text-white-50">+91 9801483755</p>
+                            <p class="text-white-50">+91 9801483755 (WhatsApp)</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6 class="text-white">
+                                <i class="bi bi-clock-fill me-2"></i>
+                                Battle Support Hours
+                            </h6>
+                            <p class="text-white-50">
+                                <strong>Gaming Support:</strong> 24/7<br>
+                                <strong>Sales Team:</strong> 9:00 AM - 11:00 PM<br>
+                                <strong>Technical Support:</strong> 10:00 AM - 10:00 PM<br>
+                                <small class="text-warning">⚡ Express support for premium members</small>
+                            </p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6 class="text-white">
+                                <i class="bi bi-geo-alt-fill me-2"></i>
+                                Battle HQ Location
+                            </h6>
+                            <p class="text-white-50">
+                                B2Battle Gaming Center<br>
+                                Patna, Bihar<br>
+                                India - 800001<br>
+                                Near Gandhi Maidan
+                            </p>
+                        </div>
+
+                        <div>
+                            <h6 class="text-white">
+                                <i class="bi bi-chat-dots-fill me-2"></i>
+                                Social Gaming
+                            </h6>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="text-white-50 fs-4"><i class="bi bi-discord"></i></a>
+                                <a href="#" class="text-white-50 fs-4"><i class="bi bi-twitch"></i></a>
+                                <a href="#" class="text-white-50 fs-4"><i class="bi bi-youtube"></i></a>
+                                <a href="#" class="text-white-50 fs-4"><i class="bi bi-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

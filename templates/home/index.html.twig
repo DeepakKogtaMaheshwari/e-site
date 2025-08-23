@@ -1,0 +1,327 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}B2Battle - Next-Gen Gaming Arsenal{% endblock %}
+
+{% block body %}
+<!-- Ultra Modern Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Animated Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+
+        <!-- Floating Orbs -->
+        <div class="absolute top-20 left-20 w-72 h-72 bg-neon-purple/20 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-neon-pink/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-neon-blue/20 rounded-full blur-3xl animate-float" style="animation-delay: -4s;"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <!-- Logo Animation -->
+        <div class="mb-8 animate-scale-in">
+            <div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-neon-purple to-neon-pink rounded-3xl shadow-neon-lg animate-glow mb-6">
+                <i data-lucide="zap" class="w-12 h-12 text-white"></i>
+            </div>
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="font-display font-black text-6xl md:text-8xl lg:text-9xl mb-6 animate-fade-in">
+            <span class="block bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent text-shadow">
+                B2Battle
+            </span>
+            <span class="block text-3xl md:text-4xl lg:text-5xl font-normal bg-gradient-to-r from-neon-purple via-neon-pink to-neon-blue bg-clip-text text-transparent mt-2">
+                Next-Gen Gaming Arsenal
+            </span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed animate-slide-up">
+            <span class="inline-flex items-center space-x-2 mr-4">
+                <i data-lucide="gamepad-2" class="w-6 h-6 text-neon-purple"></i>
+                <span>Pro Gaming Gear</span>
+            </span>
+            <span class="inline-flex items-center space-x-2 mr-4">
+                <i data-lucide="zap" class="w-6 h-6 text-neon-pink"></i>
+                <span>Lightning Performance</span>
+            </span>
+            <span class="inline-flex items-center space-x-2">
+                <i data-lucide="trophy" class="w-6 h-6 text-neon-yellow"></i>
+                <span>Champion Level</span>
+            </span>
+        </p>
+
+        <!-- Description -->
+        <p class="text-lg text-gray-400 mb-12 max-w-3xl mx-auto animate-slide-up" style="animation-delay: 0.2s;">
+            Dominate every battle with cutting-edge gaming peripherals designed for esports champions.
+            Experience lightning-fast delivery, bank-grade security, and pro-level performance that gives you the competitive edge.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-slide-up" style="animation-delay: 0.4s;">
+            <a href="{{ path('app_products') }}" class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-bold text-lg hover:shadow-neon-lg transition-all duration-300 overflow-hidden">
+                <span class="relative z-10 flex items-center space-x-3">
+                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                    <span>Explore Arsenal</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+                <div class="absolute inset-0 bg-gradient-to-r from-neon-pink to-neon-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+
+            <a href="#features" class="group inline-flex items-center px-8 py-4 glass-morphism rounded-2xl text-white font-semibold text-lg hover:bg-white/20 transition-all duration-300">
+                <span class="flex items-center space-x-3">
+                    <i data-lucide="play-circle" class="w-6 h-6"></i>
+                    <span>Watch Demo</span>
+                </span>
+            </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto animate-slide-up" style="animation-delay: 0.6s;">
+            <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent mb-2">50K+</div>
+                <div class="text-gray-400 text-sm">Pro Gamers</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-neon-purple to-neon-pink bg-clip-text text-transparent mb-2">24/7</div>
+                <div class="text-gray-400 text-sm">Support</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-neon-yellow to-neon-green bg-clip-text text-transparent mb-2">99.9%</div>
+                <div class="text-gray-400 text-sm">Uptime</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-neon-pink to-neon-purple bg-clip-text text-transparent mb-2">1M+</div>
+                <div class="text-gray-400 text-sm">Battles Won</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Ultra Modern Features Section -->
+<section id="features" class="py-24 relative">
+    <!-- Section Header -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-20">
+        <div class="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-neon-purple font-semibold text-sm mb-6 animate-slide-up">
+            <i data-lucide="star" class="w-4 h-4 mr-2"></i>
+            Why Champions Choose Us
+        </div>
+        <h2 class="font-display font-bold text-5xl md:text-6xl lg:text-7xl mb-6 animate-slide-up">
+            <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Battle-Tested
+            </span>
+            <br>
+            <span class="bg-gradient-to-r from-neon-purple via-neon-pink to-neon-blue bg-clip-text text-transparent">
+                Excellence
+            </span>
+        </h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto animate-slide-up" style="animation-delay: 0.2s;">
+            Every piece of gear is handpicked by esports professionals and tested in the heat of battle
+        </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="group hover-lift glass-morphism rounded-3xl p-8 text-center animate-slide-up" style="animation-delay: 0.1s;">
+                <div class="relative mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl flex items-center justify-center mx-auto group-hover:animate-glow transition-all duration-300">
+                        <i data-lucide="zap" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-neon-green rounded-full animate-pulse"></div>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Lightning Delivery</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Express shipping in 24-48 hours. Same-day delivery available in major cities. Your gear arrives battle-ready.
+                </p>
+                <div class="mt-6 flex items-center justify-center space-x-2 text-neon-green text-sm font-semibold">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    <span>Free Express Shipping</span>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="group hover-lift glass-morphism rounded-3xl p-8 text-center animate-slide-up" style="animation-delay: 0.2s;">
+                <div class="relative mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-r from-neon-green to-neon-blue rounded-2xl flex items-center justify-center mx-auto group-hover:animate-glow transition-all duration-300">
+                        <i data-lucide="shield-check" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-neon-yellow rounded-full animate-pulse"></div>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Fort Knox Security</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Bank-grade encryption with Razorpay. Multiple payment options including UPI, cards, and crypto wallets.
+                </p>
+                <div class="mt-6 flex items-center justify-center space-x-2 text-neon-green text-sm font-semibold">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    <span>SSL Encrypted</span>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="group hover-lift glass-morphism rounded-3xl p-8 text-center animate-slide-up" style="animation-delay: 0.3s;">
+                <div class="relative mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-r from-neon-pink to-neon-purple rounded-2xl flex items-center justify-center mx-auto group-hover:animate-glow transition-all duration-300">
+                        <i data-lucide="headphones" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-neon-blue rounded-full animate-pulse"></div>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Pro Support 24/7</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Expert gaming support team available round the clock. Setup assistance, troubleshooting, and pro recommendations.
+                </p>
+                <div class="mt-6 flex items-center justify-center space-x-2 text-neon-green text-sm font-semibold">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    <span>Always Available</span>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="group hover-lift glass-morphism rounded-3xl p-8 text-center animate-slide-up" style="animation-delay: 0.4s;">
+                <div class="relative mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-r from-neon-yellow to-neon-green rounded-2xl flex items-center justify-center mx-auto group-hover:animate-glow transition-all duration-300">
+                        <i data-lucide="award" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-neon-pink rounded-full animate-pulse"></div>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Championship Grade</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Only authentic, tournament-approved gear from top brands. Every product tested by esports professionals.
+                </p>
+                <div class="mt-6 flex items-center justify-center space-x-2 text-neon-green text-sm font-semibold">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    <span>Pro Tested</span>
+                </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="group hover-lift glass-morphism rounded-3xl p-8 text-center animate-slide-up" style="animation-delay: 0.5s;">
+                <div class="relative mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-r from-neon-blue to-neon-purple rounded-2xl flex items-center justify-center mx-auto group-hover:animate-glow transition-all duration-300">
+                        <i data-lucide="refresh-cw" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-neon-green rounded-full animate-pulse"></div>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">No-Risk Returns</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    30-day hassle-free returns. Not dominating? Return it with no questions asked. Your satisfaction guaranteed.
+                </p>
+                <div class="mt-6 flex items-center justify-center space-x-2 text-neon-green text-sm font-semibold">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    <span>Money Back Guarantee</span>
+                </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="group hover-lift glass-morphism rounded-3xl p-8 text-center animate-slide-up" style="animation-delay: 0.6s;">
+                <div class="relative mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl flex items-center justify-center mx-auto group-hover:animate-glow transition-all duration-300">
+                        <i data-lucide="users" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-neon-yellow rounded-full animate-pulse"></div>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Elite Community</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Join our exclusive gaming community. Participate in tournaments, get pro tips, and connect with champions.
+                </p>
+                <div class="mt-6 flex items-center justify-center space-x-2 text-neon-green text-sm font-semibold">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    <span>VIP Access</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ultra Modern CTA Section -->
+<section class="py-24 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-gradient-to-r from-neon-purple/10 via-transparent to-neon-pink/10"></div>
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-neon-purple/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-neon-pink/20 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-morphism rounded-3xl p-12 md:p-16 text-center animate-scale-in">
+            <!-- Badge -->
+            <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-full text-white font-bold text-sm mb-8 animate-glow">
+                <i data-lucide="crown" class="w-5 h-5 mr-2"></i>
+                Join the Elite
+            </div>
+
+            <!-- Heading -->
+            <h2 class="font-display font-black text-4xl md:text-6xl lg:text-7xl mb-6">
+                <span class="block bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Ready to
+                </span>
+                <span class="block bg-gradient-to-r from-neon-purple via-neon-pink to-neon-blue bg-clip-text text-transparent">
+                    Dominate?
+                </span>
+            </h2>
+
+            <!-- Description -->
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+                Join over <span class="text-neon-green font-bold">50,000+ pro gamers</span> who trust B2Battle for their competitive edge.
+                Your journey to championship starts here.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+                <a href="{{ path('app_products') }}" class="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-bold text-xl hover:shadow-neon-lg transition-all duration-300 overflow-hidden">
+                    <span class="relative z-10 flex items-center space-x-3">
+                        <i data-lucide="rocket" class="w-7 h-7"></i>
+                        <span>Start Your Journey</span>
+                        <i data-lucide="arrow-right" class="w-6 h-6 group-hover:translate-x-2 transition-transform"></i>
+                    </span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-neon-pink to-neon-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+
+                <a href="{{ path('app_contact') }}" class="group inline-flex items-center px-10 py-5 glass-dark rounded-2xl text-white font-semibold text-xl hover:bg-white/20 transition-all duration-300">
+                    <span class="flex items-center space-x-3">
+                        <i data-lucide="message-circle" class="w-7 h-7"></i>
+                        <span>Talk to Experts</span>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="flex items-center justify-center mb-3">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-neon-green"></i>
+                    </div>
+                    <div class="text-white font-semibold">Secure Payments</div>
+                    <div class="text-gray-400 text-sm">Bank-grade security</div>
+                </div>
+                <div class="text-center">
+                    <div class="flex items-center justify-center mb-3">
+                        <i data-lucide="truck" class="w-8 h-8 text-neon-blue"></i>
+                    </div>
+                    <div class="text-white font-semibold">Fast Delivery</div>
+                    <div class="text-gray-400 text-sm">24-48 hours</div>
+                </div>
+                <div class="text-center">
+                    <div class="flex items-center justify-center mb-3">
+                        <i data-lucide="award" class="w-8 h-8 text-neon-yellow"></i>
+                    </div>
+                    <div class="text-white font-semibold">Pro Quality</div>
+                    <div class="text-gray-400 text-sm">Tournament grade</div>
+                </div>
+                <div class="text-center">
+                    <div class="flex items-center justify-center mb-3">
+                        <i data-lucide="headphones" class="w-8 h-8 text-neon-pink"></i>
+                    </div>
+                    <div class="text-white font-semibold">24/7 Support</div>
+                    <div class="text-gray-400 text-sm">Always here</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Test - B2Battle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Cart Functionality Test</h1>
+        
+        <!-- Test Buttons -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Test Product 1 -->
+            <div class="bg-gray-800 p-6 rounded-xl">
+                <h3 class="text-xl font-bold mb-4">Gaming Mouse Pro</h3>
+                <p class="text-gray-400 mb-4">High-precision gaming mouse</p>
+                <p class="text-2xl font-bold text-green-400 mb-4">₹2,999</p>
+                
+                <div class="space-y-3">
+                    <button class="w-full py-3 bg-blue-600 hover:bg-blue-700 rounded-xl font-semibold transition-colors"
+                            onclick="handleQuickAddToCart(this)"
+                            data-product-id="test-1"
+                            data-product-name="Gaming Mouse Pro"
+                            data-product-price="2999"
+                            data-product-image="/placeholder.jpg">
+                        Add to Cart
+                    </button>
+                    
+                    <button class="w-full py-3 bg-pink-600 hover:bg-pink-700 rounded-xl font-semibold transition-colors"
+                            onclick="handleWishlistToggle(this)"
+                            data-wishlist-id="test-1"
+                            data-wishlist-name="Gaming Mouse Pro"
+                            data-wishlist-price="2999"
+                            data-wishlist-image="/placeholder.jpg">
+                        Toggle Wishlist
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Test Product 2 -->
+            <div class="bg-gray-800 p-6 rounded-xl">
+                <h3 class="text-xl font-bold mb-4">Mechanical Keyboard</h3>
+                <p class="text-gray-400 mb-4">RGB mechanical gaming keyboard</p>
+                <p class="text-2xl font-bold text-green-400 mb-4">₹5,999</p>
+                
+                <div class="space-y-3">
+                    <button class="w-full py-3 bg-blue-600 hover:bg-blue-700 rounded-xl font-semibold transition-colors"
+                            onclick="handleQuickAddToCart(this)"
+                            data-product-id="test-2"
+                            data-product-name="Mechanical Keyboard"
+                            data-product-price="5999"
+                            data-product-image="/placeholder.jpg">
+                        Add to Cart
+                    </button>
+                    
+                    <button class="w-full py-3 bg-pink-600 hover:bg-pink-700 rounded-xl font-semibold transition-colors"
+                            onclick="handleWishlistToggle(this)"
+                            data-wishlist-id="test-2"
+                            data-wishlist-name="Mechanical Keyboard"
+                            data-wishlist-price="5999"
+                            data-wishlist-image="/placeholder.jpg">
+                        Toggle Wishlist
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <button onclick="showCartModal()" class="py-3 bg-green-600 hover:bg-green-700 rounded-xl font-semibold transition-colors">
+                Show Cart
+            </button>
+            
+            <button onclick="showWishlistModal()" class="py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-colors">
+                Show Wishlist
+            </button>
+            
+            <button onclick="clearCart()" class="py-3 bg-red-600 hover:bg-red-700 rounded-xl font-semibold transition-colors">
+                Clear Cart
+            </button>
+            
+            <button onclick="testNotification()" class="py-3 bg-yellow-600 hover:bg-yellow-700 rounded-xl font-semibold transition-colors">
+                Test Notification
+            </button>
+        </div>
+        
+        <!-- Status Display -->
+        <div class="bg-gray-800 p-6 rounded-xl">
+            <h3 class="text-xl font-bold mb-4">System Status</h3>
+            <div id="status" class="space-y-2 text-sm">
+                <div>Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include B2Battle System -->
+    <script>
+        // Copy the B2Battle system from base.html.twig
+        // This is a simplified version for testing
+        
+        function updateStatus() {
+            const statusDiv = document.getElementById('status');
+            const cart = JSON.parse(localStorage.getItem('b2battle_cart') || '[]');
+            const wishlist = JSON.parse(localStorage.getItem('b2battle_wishlist') || '[]');
+            
+            statusDiv.innerHTML = `
+                <div><strong>Cart Items:</strong> ${cart.length}</div>
+                <div><strong>Wishlist Items:</strong> ${wishlist.length}</div>
+                <div><strong>B2Battle System:</strong> ${window.B2Battle ? 'Loaded' : 'Not Loaded'}</div>
+                <div><strong>Cart System:</strong> ${window.B2Battle?.cart ? 'Ready' : 'Not Ready'}</div>
+                <div><strong>Wishlist System:</strong> ${window.B2Battle?.wishlist ? 'Ready' : 'Not Ready'}</div>
+                <div><strong>Notifications:</strong> ${window.B2Battle?.notifications ? 'Ready' : 'Not Ready'}</div>
+            `;
+        }
+        
+        function clearCart() {
+            localStorage.removeItem('b2battle_cart');
+            if (window.B2Battle?.cart) {
+                window.B2Battle.cart.cart = [];
+                window.B2Battle.cart.updateUI();
+            }
+            updateStatus();
+            showNotification('Cart cleared', 'info');
+        }
+        
+        function testNotification() {
+            showNotification('Test notification working!', 'success');
+        }
+        
+        // Update status every second
+        setInterval(updateStatus, 1000);
+        
+        // Initial status update
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(updateStatus, 500);
+        });
+    </script>
+    
+    <!-- Load the main B2Battle system from base template -->
+    <script>
+        // Include the B2Battle core system here
+        // For now, let's include basic functions
+
+        // Basic fallback functions
+        function handleQuickAddToCart(button) {
+            if (!button) return;
+
+            const productId = button.dataset.productId;
+            const productName = button.dataset.productName;
+            const productPrice = button.dataset.productPrice;
+            const productImage = button.dataset.productImage;
+
+            // Add loading state
+            const originalContent = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = 'Adding...';
+
+            setTimeout(() => {
+                // Add to localStorage
+                let cart = JSON.parse(localStorage.getItem('b2battle_cart') || '[]');
+                const existingItem = cart.find(item => item.id === productId);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: productName,
+                        price: parseFloat(productPrice),
+                        quantity: 1,
+                        imageUrl: productImage
+                    });
+                }
+
+                localStorage.setItem('b2battle_cart', JSON.stringify(cart));
+
+                // Success state
+                button.innerHTML = 'Added!';
+                button.style.backgroundColor = '#10b981';
+
+                // Reset button
+                setTimeout(() => {
+                    button.innerHTML = originalContent;
+                    button.disabled = false;
+                    button.style.backgroundColor = '';
+                }, 2000);
+
+                updateStatus();
+            }, 800);
+        }
+
+        function handleWishlistToggle(button) {
+            if (!button) return;
+
+            const productId = button.dataset.wishlistId;
+            const productName = button.dataset.wishlistName;
+            const productPrice = button.dataset.wishlistPrice;
+            const productImage = button.dataset.wishlistImage;
+
+            let wishlist = JSON.parse(localStorage.getItem('b2battle_wishlist') || '[]');
+            const existingIndex = wishlist.findIndex(item => item.id === productId);
+
+            if (existingIndex > -1) {
+                wishlist.splice(existingIndex, 1);
+                button.innerHTML = 'Add to Wishlist';
+                button.style.backgroundColor = '#ec4899';
+            } else {
+                wishlist.push({
+                    id: productId,
+                    name: productName,
+                    price: parseFloat(productPrice),
+                    imageUrl: productImage,
+                    addedAt: new Date().toISOString()
+                });
+                button.innerHTML = 'Remove from Wishlist';
+                button.style.backgroundColor = '#dc2626';
+            }
+
+            localStorage.setItem('b2battle_wishlist', JSON.stringify(wishlist));
+            updateStatus();
+        }
+
+        function showCartModal() {
+            const cart = JSON.parse(localStorage.getItem('b2battle_cart') || '[]');
+            alert(`Cart has ${cart.length} items:\n${cart.map(item => `${item.name} (₹${item.price}) x${item.quantity}`).join('\n')}`);
+        }
+
+        function showWishlistModal() {
+            const wishlist = JSON.parse(localStorage.getItem('b2battle_wishlist') || '[]');
+            alert(`Wishlist has ${wishlist.length} items:\n${wishlist.map(item => `${item.name} (₹${item.price})`).join('\n')}`);
+        }
+
+        function showNotification(message, type) {
+            console.log(`${type.toUpperCase()}: ${message}`);
+
+            // Simple notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 z-50 px-6 py-3 rounded-xl text-white font-semibold';
+            notification.style.backgroundColor = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6';
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

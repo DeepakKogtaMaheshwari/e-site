@@ -1,0 +1,273 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Refund Policy - B2Battle Gaming{% endblock %}
+
+{% block body %}
+<!-- Ultra Modern Refund Policy Page -->
+<section class="py-16 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-gradient-to-r from-neon-pink/10 via-transparent to-neon-yellow/10"></div>
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-neon-pink/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-neon-yellow/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center space-x-2 text-sm mb-8 animate-slide-up">
+            <a href="{{ path('app_home') }}" class="flex items-center space-x-1 text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="home" class="w-4 h-4"></i>
+                <span>Home</span>
+            </a>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-600"></i>
+            <span class="text-white font-semibold">Refund Policy</span>
+        </nav>
+
+        <!-- Header -->
+        <div class="text-center mb-12 animate-slide-up">
+            <div class="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-neon-pink font-semibold text-sm mb-6">
+                <i data-lucide="rotate-ccw" class="w-4 h-4 mr-2"></i>
+                Hassle-Free Returns
+            </div>
+
+            <h1 class="font-display font-black text-4xl md:text-6xl lg:text-7xl mb-4">
+                <span class="block bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Refund
+                </span>
+                <span class="block bg-gradient-to-r from-neon-pink via-neon-yellow to-neon-orange bg-clip-text text-transparent">
+                    Policy
+                </span>
+            </h1>
+
+            <p class="text-lg text-gray-400 mb-4">Last updated: {{ 'now'|date('F d, Y') }}</p>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                At B2Battle, we stand behind our gaming gear. If you're not satisfied, we'll make it right!
+            </p>
+        </div>
+
+        <!-- Content -->
+        <div class="glass-morphism rounded-3xl p-8 md:p-12 animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="space-y-12">
+                <!-- Section 1 -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-r from-neon-pink to-neon-yellow rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold">1</span>
+                        </div>
+                        30-Day Return Window
+                    </h2>
+                    <div class="text-gray-300 leading-relaxed">
+                        <p class="mb-6">You have 30 days from delivery to return gaming gear for a full refund. No questions asked if you're not completely satisfied!</p>
+
+                        <div class="bg-gradient-to-r from-neon-green/20 to-neon-blue/20 border border-neon-green/30 rounded-2xl p-6">
+                            <h4 class="text-white font-semibold mb-3 flex items-center">
+                                <i data-lucide="clock" class="w-5 h-5 mr-2 text-neon-green"></i>
+                                Return Timeline:
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="text-center p-4 bg-white/5 rounded-xl">
+                                    <div class="text-2xl font-bold text-neon-green mb-2">0-7 Days</div>
+                                    <div class="text-gray-300 text-sm">Instant refund processing</div>
+                                </div>
+                                <div class="text-center p-4 bg-white/5 rounded-xl">
+                                    <div class="text-2xl font-bold text-neon-blue mb-2">8-21 Days</div>
+                                    <div class="text-gray-300 text-sm">Standard refund processing</div>
+                                </div>
+                                <div class="text-center p-4 bg-white/5 rounded-xl">
+                                    <div class="text-2xl font-bold text-neon-yellow mb-2">22-30 Days</div>
+                                    <div class="text-gray-300 text-sm">Final return window</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-r from-neon-yellow to-neon-orange rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold">2</span>
+                        </div>
+                        Eligible Gaming Gear
+                    </h2>
+                    <div class="text-gray-300 leading-relaxed">
+                        <p class="mb-6">Most gaming products are eligible for return. Here's what qualifies for our hassle-free return policy:</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white/5 rounded-2xl p-6">
+                                <h4 class="text-white font-semibold mb-4 flex items-center">
+                                    <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-neon-green"></i>
+                                    Returnable Items
+                                </h4>
+                                <ul class="space-y-2 text-gray-400">
+                                    <li class="flex items-center">
+                                        <i data-lucide="check" class="w-4 h-4 mr-2 text-neon-green"></i>
+                                        Gaming peripherals (mice, keyboards, headsets)
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i data-lucide="check" class="w-4 h-4 mr-2 text-neon-green"></i>
+                                        Gaming chairs and desks
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i data-lucide="check" class="w-4 h-4 mr-2 text-neon-green"></i>
+                                        Monitors and displays
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i data-lucide="check" class="w-4 h-4 mr-2 text-neon-green"></i>
+                                        Gaming accessories
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/5 rounded-2xl p-6">
+                                <h4 class="text-white font-semibold mb-4 flex items-center">
+                                    <i data-lucide="package" class="w-5 h-5 mr-2 text-neon-blue"></i>
+                                    Condition Requirements
+                                </h4>
+                                <ul class="space-y-2 text-gray-400">
+                                    <li class="flex items-center">
+                                        <i data-lucide="check" class="w-4 h-4 mr-2 text-neon-blue"></i>
+                                        Original packaging included
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i data-lucide="check" class="w-4 h-4 mr-2 text-neon-blue"></i>
+                                        All accessories and cables
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i data-lucide="check" class="w-4 h-4 mr-2 text-neon-blue"></i>
+                                        No physical damage
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i data-lucide="check" class="w-4 h-4 mr-2 text-neon-blue"></i>
+                                        Clean and functional
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-r from-neon-orange to-neon-red rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold">3</span>
+                        </div>
+                        Easy Return Process
+                    </h2>
+                    <div class="text-gray-300 leading-relaxed">
+                        <p class="mb-6">Returning gaming gear is as easy as a headshot! Follow these simple steps:</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                            <div class="text-center p-6 bg-white/5 rounded-2xl">
+                                <div class="w-12 h-12 bg-gradient-to-r from-neon-pink to-neon-yellow rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <span class="text-white font-bold">1</span>
+                                </div>
+                                <h4 class="text-white font-semibold mb-2">Contact Us</h4>
+                                <p class="text-gray-400 text-sm">Reach out via email, phone, or contact form</p>
+                            </div>
+                            <div class="text-center p-6 bg-white/5 rounded-2xl">
+                                <div class="w-12 h-12 bg-gradient-to-r from-neon-yellow to-neon-green rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <span class="text-white font-bold">2</span>
+                                </div>
+                                <h4 class="text-white font-semibold mb-2">Get Authorization</h4>
+                                <p class="text-gray-400 text-sm">Receive return label and instructions</p>
+                            </div>
+                            <div class="text-center p-6 bg-white/5 rounded-2xl">
+                                <div class="w-12 h-12 bg-gradient-to-r from-neon-green to-neon-blue rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <span class="text-white font-bold">3</span>
+                                </div>
+                                <h4 class="text-white font-semibold mb-2">Ship It Back</h4>
+                                <p class="text-gray-400 text-sm">Pack securely and send using our label</p>
+                            </div>
+                            <div class="text-center p-6 bg-white/5 rounded-2xl">
+                                <div class="w-12 h-12 bg-gradient-to-r from-neon-blue to-neon-purple rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <span class="text-white font-bold">4</span>
+                                </div>
+                                <h4 class="text-white font-semibold mb-2">Get Refund</h4>
+                                <p class="text-gray-400 text-sm">Receive money back in 2-5 business days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4 -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-r from-neon-purple to-neon-pink rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold">4</span>
+                        </div>
+                        Refund Processing
+                    </h2>
+                    <div class="text-gray-300 leading-relaxed">
+                        <p class="mb-6">Lightning-fast refund processing that gets your money back quickly:</p>
+
+                        <div class="bg-gradient-to-r from-neon-green/20 to-neon-blue/20 border border-neon-green/30 rounded-2xl p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="text-center">
+                                    <i data-lucide="search" class="w-12 h-12 text-neon-green mx-auto mb-3"></i>
+                                    <h4 class="text-white font-semibold mb-2">Inspection</h4>
+                                    <p class="text-gray-400 text-sm">2-3 business days quality check</p>
+                                </div>
+                                <div class="text-center">
+                                    <i data-lucide="credit-card" class="w-12 h-12 text-neon-blue mx-auto mb-3"></i>
+                                    <h4 class="text-white font-semibold mb-2">Processing</h4>
+                                    <p class="text-gray-400 text-sm">Instant refund to original payment method</p>
+                                </div>
+                                <div class="text-center">
+                                    <i data-lucide="check-circle" class="w-12 h-12 text-neon-purple mx-auto mb-3"></i>
+                                    <h4 class="text-white font-semibold mb-2">Completion</h4>
+                                    <p class="text-gray-400 text-sm">Money appears in 5-10 business days</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="bg-gradient-to-r from-neon-pink/20 to-neon-yellow/20 border border-neon-pink/30 rounded-2xl p-8">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <i data-lucide="headphones" class="w-8 h-8 mr-3 text-neon-pink"></i>
+                        Need Help with Returns?
+                    </h2>
+                    <p class="text-gray-300 mb-6">Our gaming support team is standing by to help with any return questions!</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <a href="mailto:bittuminati99@gmail.com" class="flex items-center space-x-3 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <i data-lucide="mail" class="w-6 h-6 text-neon-pink"></i>
+                            <div>
+                                <div class="text-white font-semibold">Email Support</div>
+                                <div class="text-gray-400 text-sm">bittuminati99@gmail.com</div>
+                            </div>
+                        </a>
+                        <a href="tel:+919801483755" class="flex items-center space-x-3 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <i data-lucide="phone" class="w-6 h-6 text-neon-yellow"></i>
+                            <div>
+                                <div class="text-white font-semibold">Phone Support</div>
+                                <div class="text-gray-400 text-sm">+91 9801483755</div>
+                            </div>
+                        </a>
+                        <a href="{{ path('app_contact') }}" class="flex items-center space-x-3 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <i data-lucide="message-circle" class="w-6 h-6 text-neon-orange"></i>
+                            <div>
+                                <div class="text-white font-semibold">Live Chat</div>
+                                <div class="text-gray-400 text-sm">Contact Form</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-white/5 rounded-xl">
+                        <h4 class="text-white font-semibold mb-2 flex items-center">
+                            <i data-lucide="clock" class="w-5 h-5 mr-2 text-neon-green"></i>
+                            Support Hours
+                        </h4>
+                        <p class="text-gray-400">24/7 for returns and refunds • Live chat available 9 AM - 11 PM IST</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Initialize Lucide Icons
+lucide.createIcons();
+</script>
+{% endblock %}

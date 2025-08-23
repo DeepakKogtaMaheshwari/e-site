@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Terms & Conditions - B2Battle Gaming{% endblock %}
+
+{% block body %}
+<!-- Ultra Modern Terms & Conditions Page -->
+<section class="py-16 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-gradient-to-r from-neon-green/10 via-transparent to-neon-blue/10"></div>
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-neon-green/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-neon-blue/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center space-x-2 text-sm mb-8 animate-slide-up">
+            <a href="{{ path('app_home') }}" class="flex items-center space-x-1 text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="home" class="w-4 h-4"></i>
+                <span>Home</span>
+            </a>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-600"></i>
+            <span class="text-white font-semibold">Terms & Conditions</span>
+        </nav>
+
+        <!-- Header -->
+        <div class="text-center mb-12 animate-slide-up">
+            <div class="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-neon-green font-semibold text-sm mb-6">
+                <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>
+                Gaming Rules & Regulations
+            </div>
+
+            <h1 class="font-display font-black text-4xl md:text-6xl lg:text-7xl mb-4">
+                <span class="block bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Terms &
+                </span>
+                <span class="block bg-gradient-to-r from-neon-green via-neon-blue to-neon-purple bg-clip-text text-transparent">
+                    Conditions
+                </span>
+            </h1>
+
+            <p class="text-lg text-gray-400 mb-4">Last updated: {{ 'now'|date('F d, Y') }}</p>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                Welcome to B2Battle! These terms govern your use of our gaming platform and services.
+            </p>
+        </div>
+
+        <!-- Content -->
+        <div class="glass-morphism rounded-3xl p-8 md:p-12 animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="space-y-12">
+                <!-- Section 1 -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-r from-neon-green to-neon-blue rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold">1</span>
+                        </div>
+                        Acceptance of Terms
+                    </h2>
+                    <div class="text-gray-300 leading-relaxed">
+                        <p class="mb-4">By accessing B2Battle and using our gaming services, you accept and agree to be bound by these terms. If you don't agree, please don't use our platform.</p>
+
+                        <div class="bg-gradient-to-r from-neon-green/20 to-neon-blue/20 border border-neon-green/30 rounded-2xl p-6">
+                            <h4 class="text-white font-semibold mb-3 flex items-center">
+                                <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-neon-green"></i>
+                                By Using B2Battle You Agree To:
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div class="flex items-center space-x-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-neon-green"></i>
+                                    <span class="text-gray-300">Follow all gaming rules</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-neon-green"></i>
+                                    <span class="text-gray-300">Respect other gamers</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-neon-green"></i>
+                                    <span class="text-gray-300">Use authentic products only</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-neon-green"></i>
+                                    <span class="text-gray-300">Provide accurate information</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold">2</span>
+                        </div>
+                        Gaming Products & Services
+                    </h2>
+                    <div class="text-gray-300 leading-relaxed">
+                        <p class="mb-6">We provide authentic gaming gear and professional esports equipment. All products are tested for competitive gaming standards.</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white/5 rounded-2xl p-6">
+                                <h4 class="text-white font-semibold mb-3 flex items-center">
+                                    <i data-lucide="package" class="w-5 h-5 mr-2 text-neon-blue"></i>
+                                    Product Quality
+                                </h4>
+                                <ul class="space-y-2 text-gray-400">
+                                    <li>• Tournament-grade equipment</li>
+                                    <li>• Authentic brand products</li>
+                                    <li>• Professional testing standards</li>
+                                    <li>• Quality assurance guarantee</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/5 rounded-2xl p-6">
+                                <h4 class="text-white font-semibold mb-3 flex items-center">
+                                    <i data-lucide="shield-check" class="w-5 h-5 mr-2 text-neon-purple"></i>
+                                    Service Standards
+                                </h4>
+                                <ul class="space-y-2 text-gray-400">
+                                    <li>• 24/7 gaming support</li>
+                                    <li>• Expert recommendations</li>
+                                    <li>• Fast delivery service</li>
+                                    <li>• Professional installation help</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="bg-gradient-to-r from-neon-green/20 to-neon-blue/20 border border-neon-green/30 rounded-2xl p-8">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <i data-lucide="message-circle" class="w-8 h-8 mr-3 text-neon-green"></i>
+                        Questions About Terms?
+                    </h2>
+                    <p class="text-gray-300 mb-6">Our gaming legal team is here to help clarify any terms or conditions!</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <a href="mailto:bittuminati99@gmail.com" class="flex items-center space-x-3 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <i data-lucide="mail" class="w-6 h-6 text-neon-green"></i>
+                            <div>
+                                <div class="text-white font-semibold">Email</div>
+                                <div class="text-gray-400 text-sm">bittuminati99@gmail.com</div>
+                            </div>
+                        </a>
+                        <a href="tel:+919801483755" class="flex items-center space-x-3 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <i data-lucide="phone" class="w-6 h-6 text-neon-blue"></i>
+                            <div>
+                                <div class="text-white font-semibold">Phone</div>
+                                <div class="text-gray-400 text-sm">+91 9801483755</div>
+                            </div>
+                        </a>
+                        <a href="{{ path('app_contact') }}" class="flex items-center space-x-3 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <i data-lucide="headphones" class="w-6 h-6 text-neon-purple"></i>
+                            <div>
+                                <div class="text-white font-semibold">Support</div>
+                                <div class="text-gray-400 text-sm">Contact Form</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Initialize Lucide Icons
+lucide.createIcons();
+</script>
+{% endblock %}

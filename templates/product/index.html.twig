@@ -1,0 +1,819 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gaming Arsenal - B2Battle{% endblock %}
+
+{% block body %}
+<!-- Ultra Modern Page Header -->
+<section class="py-16 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-gradient-to-r from-neon-purple/10 via-transparent to-neon-pink/10"></div>
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-neon-purple/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-neon-pink/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center space-x-2 text-sm mb-8 animate-slide-up">
+            <a href="{{ path('app_home') }}" class="flex items-center space-x-1 text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="home" class="w-4 h-4"></i>
+                <span>Home</span>
+            </a>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-600"></i>
+            <span class="text-white font-semibold">Gaming Arsenal</span>
+        </nav>
+
+        <!-- Header Content -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-neon-purple font-semibold text-sm mb-6 animate-slide-up">
+                <i data-lucide="gamepad-2" class="w-4 h-4 mr-2"></i>
+                Championship Grade Equipment
+            </div>
+
+            <h1 class="font-display font-black text-5xl md:text-7xl lg:text-8xl mb-6 animate-slide-up">
+                <span class="block bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Gaming
+                </span>
+                <span class="block bg-gradient-to-r from-neon-purple via-neon-pink to-neon-blue bg-clip-text text-transparent">
+                    Arsenal
+                </span>
+            </h1>
+
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-8 animate-slide-up" style="animation-delay: 0.2s;">
+                Professional-grade gaming equipment trusted by esports champions worldwide.
+                Every piece handpicked for competitive excellence.
+            </p>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 animate-slide-up" style="animation-delay: 0.4s;">
+                <button data-filter="all" class="filter-btn px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl text-white font-semibold hover:shadow-neon transition-all duration-300">
+                    All Gear
+                </button>
+                <button data-filter="peripherals" class="filter-btn px-6 py-3 glass-morphism rounded-xl text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300">
+                    Peripherals
+                </button>
+                <button data-filter="audio" class="filter-btn px-6 py-3 glass-morphism rounded-xl text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300">
+                    Audio
+                </button>
+                <button data-filter="displays" class="filter-btn px-6 py-3 glass-morphism rounded-xl text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300">
+                    Displays
+                </button>
+                <button data-filter="accessories" class="filter-btn px-6 py-3 glass-morphism rounded-xl text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300">
+                    Accessories
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ultra Modern Products Grid -->
+<section class="pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% if products is empty %}
+            <!-- Empty State -->
+            <div class="flex justify-center">
+                <div class="glass-morphism rounded-3xl p-12 text-center max-w-lg animate-scale-in">
+                    <div class="w-24 h-24 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="package" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Arsenal Restocking</h3>
+                    <p class="text-gray-400 mb-6">Our gaming weapons are being upgraded. Check back soon for the latest championship gear!</p>
+                    <a href="{{ path('app_home') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl text-white font-semibold hover:shadow-neon transition-all duration-300">
+                        <i data-lucide="home" class="w-5 h-5 mr-2"></i>
+                        Return to Base
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {% for product in products %}
+                    <div class="group hover-lift animate-slide-up" style="animation-delay: {{ loop.index0 * 0.1 }}s;">
+                        <div class="glass-morphism rounded-3xl overflow-hidden h-full">
+                            <!-- Product Badge -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <div class="flex space-x-2">
+                                    <span class="px-3 py-1 bg-gradient-to-r from-neon-green to-neon-blue rounded-full text-white text-xs font-bold">
+                                        PRO
+                                    </span>
+                                    {% if loop.index <= 3 %}
+                                        <span class="px-3 py-1 bg-gradient-to-r from-neon-yellow to-neon-pink rounded-full text-white text-xs font-bold animate-pulse">
+                                            HOT
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Product Image -->
+                            <div class="relative h-64 overflow-hidden">
+                                {% if product.imageUrl %}
+                                    <img src="{{ product.imageUrl }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                {% else %}
+                                    <div class="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                                        <i data-lucide="gamepad-2" class="w-16 h-16 text-gray-600"></i>
+                                    </div>
+                                {% endif %}
+
+                                <!-- Enhanced Hover Overlay -->
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                                    <div class="flex space-x-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                        <!-- Wishlist Button -->
+                                        <button class="wishlist-btn w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                                data-wishlist-id="{{ product.id }}"
+                                                data-wishlist-name="{{ product.name }}"
+                                                data-wishlist-price="{{ product.price }}"
+                                                data-wishlist-image="{{ product.imageUrl }}"
+                                                data-tooltip="Add to Wishlist"
+                                                onclick="handleWishlistToggle(this)">
+                                            <i data-lucide="heart" class="w-5 h-5"></i>
+                                        </button>
+
+                                        <!-- Quick View Button -->
+                                        <button class="quick-view-btn w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                                data-product-id="{{ product.id }}"
+                                                data-product-name="{{ product.name }}"
+                                                data-product-price="{{ product.price }}"
+                                                data-product-image="{{ product.imageUrl }}"
+                                                data-product-description="{{ product.description }}"
+                                                data-tooltip="Quick View">
+                                            <i data-lucide="eye" class="w-5 h-5"></i>
+                                        </button>
+
+                                        <!-- Quick Add to Cart -->
+                                        <button class="quick-add-btn w-12 h-12 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl flex items-center justify-center text-white hover:shadow-neon transition-all duration-300"
+                                                data-product-id="{{ product.id }}"
+                                                data-product-name="{{ product.name }}"
+                                                data-product-price="{{ product.price }}"
+                                                data-product-image="{{ product.imageUrl }}"
+                                                data-tooltip="Quick Add to Cart"
+                                                onclick="handleQuickAddToCart(this)">
+                                            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                                        </button>
+
+                                        <!-- Compare Button -->
+                                        <button class="compare-btn w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                                data-product-id="{{ product.id }}"
+                                                data-tooltip="Add to Compare">
+                                            <i data-lucide="git-compare" class="w-5 h-5"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Stock Status -->
+                                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span class="px-3 py-1 bg-green-500/80 backdrop-blur-sm rounded-full text-white text-xs font-semibold">
+                                        ✓ {{ random(5, 50) }} in stock
+                                    </span>
+                                </div>
+
+                                <!-- Quick Actions Top Right -->
+                                <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                                    <button class="view-details-btn w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                            onclick="window.location.href='{{ path('app_product_show', {id: product.id}) }}'"
+                                            data-tooltip="View Details">
+                                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Product Info -->
+                            <div class="p-6">
+                                <!-- Product Name -->
+                                <h3 class="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-neon-purple transition-colors">
+                                    {{ product.name }}
+                                </h3>
+
+                                <!-- Product Description -->
+                                <p class="text-gray-400 text-sm mb-4 line-clamp-3">
+                                    {{ product.description|length > 100 ? product.description|slice(0, 100) ~ '...' : product.description }}
+                                </p>
+
+                                <!-- Rating -->
+                                <div class="flex items-center mb-4">
+                                    <div class="flex text-neon-yellow">
+                                        {% for i in 1..5 %}
+                                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                        {% endfor %}
+                                    </div>
+                                    <span class="text-gray-400 text-sm ml-2">(4.9) • {{ random(50, 500) }} reviews</span>
+                                </div>
+
+                                <!-- Enhanced Price and Actions -->
+                                <div class="space-y-4">
+                                    <!-- Price Section -->
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="text-2xl font-bold bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent">
+                                                {{ product.formattedPrice }}
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <span class="text-gray-500 text-xs line-through">
+                                                    ₹{{ (product.price * 1.2)|number_format(0, '', ',') }}
+                                                </span>
+                                                <span class="px-2 py-1 bg-gradient-to-r from-neon-green to-neon-blue rounded-full text-white text-xs font-bold">
+                                                    17% OFF
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Savings Display -->
+                                        <div class="text-right">
+                                            <div class="text-xs text-green-400 font-semibold">Save ₹{{ (product.price * 0.2)|number_format(0, '', ',') }}</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <button class="quick-add-to-cart-btn px-4 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl text-white font-semibold hover:shadow-neon transition-all duration-300 text-sm flex items-center justify-center space-x-2"
+                                                data-product-id="{{ product.id }}"
+                                                data-product-name="{{ product.name }}"
+                                                data-product-price="{{ product.price }}"
+                                                data-product-image="{{ product.imageUrl }}"
+                                                onclick="handleQuickAddToCart(this)">
+                                            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                                            <span>Add Cart</span>
+                                        </button>
+
+                                        <a href="{{ path('app_checkout', {id: product.id}) }}" class="px-4 py-3 bg-white/10 rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-300 text-sm flex items-center justify-center space-x-2 border border-white/20">
+                                            <i data-lucide="zap" class="w-4 h-4"></i>
+                                            <span>Buy Now</span>
+                                        </a>
+                                    </div>
+
+                                    <!-- View Details Link -->
+                                    <a href="{{ path('app_product_show', {id: product.id}) }}" class="w-full px-4 py-2 glass-dark rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-300 text-sm flex items-center justify-center space-x-2">
+                                        <i data-lucide="eye" class="w-4 h-4"></i>
+                                        <span>View Details</span>
+                                    </a>
+                                </div>
+
+                                <!-- Enhanced Features -->
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded-lg text-xs font-semibold">✓ Free Shipping</span>
+                                    <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded-lg text-xs font-semibold">🛡️ 1 Year Warranty</span>
+                                    <span class="px-2 py-1 bg-purple-500/20 text-purple-400 rounded-lg text-xs font-semibold">⚡ Pro Grade</span>
+                                    <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded-lg text-xs font-semibold">🎮 Tournament Ready</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Load More / CTA Section -->
+            <div class="mt-16 text-center">
+                <div class="glass-morphism rounded-3xl p-8 animate-scale-in">
+                    <h3 class="text-2xl font-bold text-white mb-4">Need Expert Recommendations?</h3>
+                    <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                        Our gaming specialists can help you build the perfect setup for your playstyle and budget.
+                        Get personalized advice from esports professionals.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="{{ path('app_contact') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl text-white font-semibold hover:shadow-neon transition-all duration-300">
+                            <i data-lucide="headphones" class="w-5 h-5 mr-2"></i>
+                            Talk to Experts
+                        </a>
+                        <a href="#" class="inline-flex items-center px-6 py-3 glass-dark rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-300">
+                            <i data-lucide="filter" class="w-5 h-5 mr-2"></i>
+                            Advanced Filters
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<script>
+// Enhanced Product Page Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Enhanced Product Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card, .group.hover-lift');
+
+    // Advanced Filter System
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+
+            // Update active button with animation
+            filterButtons.forEach(btn => {
+                btn.className = 'filter-btn px-6 py-3 glass-morphism rounded-xl text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300';
+            });
+            this.className = 'filter-btn px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl text-white font-semibold hover:shadow-neon transition-all duration-300';
+
+            // Animate filter change
+            productCards.forEach((card, index) => {
+                card.style.transform = 'scale(0.8)';
+                card.style.opacity = '0.5';
+
+                setTimeout(() => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                        card.style.transform = 'scale(1)';
+                        card.style.opacity = '1';
+                        card.style.animationDelay = `${index * 0.05}s`;
+                    } else {
+                        // Smart filtering based on product names and categories
+                        const productName = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                        const shouldShow =
+                            (filter === 'peripherals' && (productName.includes('mouse') || productName.includes('keyboard') || productName.includes('controller'))) ||
+                            (filter === 'audio' && (productName.includes('headset') || productName.includes('speaker') || productName.includes('mic'))) ||
+                            (filter === 'displays' && (productName.includes('monitor') || productName.includes('display'))) ||
+                            (filter === 'accessories' && (productName.includes('chair') || productName.includes('desk') || productName.includes('pad') || productName.includes('light') || productName.includes('glasses') || productName.includes('backpack')));
+
+                        if (shouldShow) {
+                            card.style.display = 'block';
+                            card.style.transform = 'scale(1)';
+                            card.style.opacity = '1';
+                            card.style.animationDelay = `${index * 0.05}s`;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                }, 200);
+            });
+
+            // Show filter notification
+            const visibleCount = Array.from(productCards).filter(card =>
+                filter === 'all' || window.getComputedStyle(card).display !== 'none'
+            ).length;
+
+            setTimeout(() => {
+                window.B2Battle?.notifications?.show(
+                    `Showing ${visibleCount} ${filter === 'all' ? 'gaming products' : filter}`,
+                    'info'
+                );
+            }, 300);
+        });
+    });
+
+    // Enhanced Quick Add to Cart Functionality
+    document.querySelectorAll('.quick-add-to-cart-btn, .quick-add-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const productId = this.dataset.productId;
+            const productName = this.dataset.productName;
+            const productPrice = this.dataset.productPrice;
+            const productImage = this.dataset.productImage;
+
+            // Add loading state
+            const originalContent = this.innerHTML;
+            this.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Adding...</span>
+                </div>
+            `;
+            this.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                // Add to cart using B2Battle system
+                if (window.B2Battle?.cart) {
+                    window.B2Battle.cart.addItem(productId, productName, productPrice, 1, productImage);
+                } else {
+                    // Fallback
+                    addToCart(productId, productName, productPrice, 1, productImage);
+                }
+
+                // Success state
+                this.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="check" class="w-4 h-4"></i>
+                        <span>Added!</span>
+                    </div>
+                `;
+
+                // Reset button after delay
+                setTimeout(() => {
+                    this.innerHTML = originalContent;
+                    this.disabled = false;
+                    lucide.createIcons();
+                }, 2000);
+            }, 800);
+        });
+    });
+
+    // Quick View Functionality
+    document.querySelectorAll('.quick-view-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const productId = this.dataset.productId;
+            const productName = this.dataset.productName || 'Gaming Product';
+            const productPrice = this.dataset.productPrice || '0';
+            const productImage = this.dataset.productImage || '';
+            const productDescription = this.dataset.productDescription || 'Professional gaming equipment';
+
+            showQuickViewModal(productId, productName, productPrice, productImage, productDescription);
+        });
+    });
+
+    // Compare Functionality
+    let compareList = JSON.parse(localStorage.getItem('b2battle_compare') || '[]');
+
+    document.querySelectorAll('.compare-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const productId = this.dataset.productId;
+            const productCard = this.closest('.group, .product-card');
+            const productName = productCard.querySelector('h3').textContent;
+            const productPrice = productCard.querySelector('[data-product-price]')?.dataset.productPrice || '0';
+            const productImage = productCard.querySelector('img')?.src || '';
+
+            // Toggle compare
+            const existingIndex = compareList.findIndex(item => item.id === productId);
+
+            if (existingIndex > -1) {
+                compareList.splice(existingIndex, 1);
+                this.classList.remove('active');
+                window.B2Battle?.notifications?.show(`${productName} removed from compare`, 'info');
+            } else {
+                if (compareList.length >= 4) {
+                    window.B2Battle?.notifications?.show('Maximum 4 products can be compared', 'warning');
+                    return;
+                }
+
+                compareList.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    image: productImage
+                });
+                this.classList.add('active');
+                window.B2Battle?.notifications?.show(`${productName} added to compare (${compareList.length}/4)`, 'success');
+            }
+
+            localStorage.setItem('b2battle_compare', JSON.stringify(compareList));
+            updateCompareUI();
+        });
+    });
+});
+
+// Quick View Modal System
+function showQuickViewModal(productId, productName, productPrice, productImage, productDescription) {
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4';
+    modal.id = 'quick-view-modal';
+
+    modal.innerHTML = `
+        <div class="glass-morphism rounded-3xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto transform scale-95 opacity-0 transition-all duration-300">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white">Quick View</h2>
+                <button class="close-modal w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Product Image -->
+                <div class="relative">
+                    <img src="${productImage}" alt="${productName}" class="w-full h-80 object-cover rounded-2xl">
+                    <div class="absolute top-4 left-4">
+                        <span class="px-3 py-1 bg-gradient-to-r from-neon-green to-neon-blue rounded-full text-white text-sm font-bold">
+                            PRO GRADE
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">${productName}</h3>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="flex text-neon-yellow">
+                                ${'<i data-lucide="star" class="w-4 h-4 fill-current"></i>'.repeat(5)}
+                            </div>
+                            <span class="text-gray-400">(4.9) • ${Math.floor(Math.random() * 500 + 50)} reviews</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-3xl font-bold bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent mb-2">
+                            ₹${parseFloat(productPrice).toLocaleString()}
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-gray-500 line-through">₹${(parseFloat(productPrice) * 1.2).toLocaleString()}</span>
+                            <span class="px-2 py-1 bg-gradient-to-r from-neon-green to-neon-blue rounded-full text-white text-xs font-bold">17% OFF</span>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-300 leading-relaxed">${productDescription}</p>
+
+                    <!-- Features -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="truck" class="w-5 h-5 text-neon-green"></i>
+                            <span class="text-gray-300">Free Express Shipping</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-neon-blue"></i>
+                            <span class="text-gray-300">1 Year Warranty</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="refresh-cw" class="w-5 h-5 text-neon-purple"></i>
+                            <span class="text-gray-300">30-Day Returns</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="headphones" class="w-5 h-5 text-neon-pink"></i>
+                            <span class="text-gray-300">24/7 Support</span>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="space-y-3">
+                        <button class="quick-modal-add-cart w-full py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-bold hover:shadow-neon-lg transition-all duration-300"
+                                data-product-id="${productId}" data-product-name="${productName}" data-product-price="${productPrice}" data-product-image="${productImage}">
+                            <span class="flex items-center justify-center space-x-2">
+                                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                                <span>Add to Cart</span>
+                            </span>
+                        </button>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="quick-modal-wishlist py-3 glass-dark rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-300"
+                                    data-product-id="${productId}" data-product-name="${productName}" data-product-price="${productPrice}" data-product-image="${productImage}">
+                                <span class="flex items-center justify-center space-x-2">
+                                    <i data-lucide="heart" class="w-4 h-4"></i>
+                                    <span>Wishlist</span>
+                                </span>
+                            </button>
+
+                            <a href="/product/${productId}" class="py-3 glass-dark rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-300 flex items-center justify-center space-x-2">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                                <span>Full Details</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Setup modal events
+    modal.querySelector('.close-modal').addEventListener('click', () => closeQuickViewModal(modal));
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeQuickViewModal(modal);
+    });
+
+    // Setup action buttons
+    modal.querySelector('.quick-modal-add-cart').addEventListener('click', function() {
+        const productId = this.dataset.productId;
+        const productName = this.dataset.productName;
+        const productPrice = this.dataset.productPrice;
+        const productImage = this.dataset.productImage;
+
+        if (window.B2Battle?.cart) {
+            window.B2Battle.cart.addItem(productId, productName, productPrice, 1, productImage);
+        }
+
+        closeQuickViewModal(modal);
+    });
+
+    modal.querySelector('.quick-modal-wishlist').addEventListener('click', function() {
+        const productId = this.dataset.productId;
+        const productName = this.dataset.productName;
+        const productPrice = this.dataset.productPrice;
+        const productImage = this.dataset.productImage;
+
+        if (window.B2Battle?.wishlist) {
+            window.B2Battle.wishlist.toggleItem(productId, productName, productPrice, productImage);
+        }
+    });
+
+    // Initialize icons and animate in
+    lucide.createIcons();
+    setTimeout(() => {
+        modal.querySelector('.glass-morphism').style.transform = 'scale(1)';
+        modal.querySelector('.glass-morphism').style.opacity = '1';
+    }, 10);
+}
+
+function closeQuickViewModal(modal) {
+    modal.querySelector('.glass-morphism').style.transform = 'scale(0.95)';
+    modal.querySelector('.glass-morphism').style.opacity = '0';
+
+    setTimeout(() => {
+        if (document.body.contains(modal)) {
+            document.body.removeChild(modal);
+        }
+    }, 300);
+}
+
+// Compare System
+function updateCompareUI() {
+    const compareList = JSON.parse(localStorage.getItem('b2battle_compare') || '[]');
+
+    // Update compare buttons
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+        const productId = btn.dataset.productId;
+        if (compareList.some(item => item.id === productId)) {
+            btn.classList.add('active');
+            btn.style.background = 'linear-gradient(135deg, #8b5cf6, #7c3aed)';
+        } else {
+            btn.classList.remove('active');
+            btn.style.background = '';
+        }
+    });
+
+    // Show compare bar if items exist
+    if (compareList.length > 0) {
+        showCompareBar(compareList);
+    } else {
+        hideCompareBar();
+    }
+}
+
+function showCompareBar(compareList) {
+    let compareBar = document.getElementById('compare-bar');
+
+    if (!compareBar) {
+        compareBar = document.createElement('div');
+        compareBar.id = 'compare-bar';
+        compareBar.className = 'fixed bottom-4 right-4 z-40 glass-morphism rounded-2xl p-4 max-w-sm';
+        document.body.appendChild(compareBar);
+    }
+
+    compareBar.innerHTML = `
+        <div class="flex items-center justify-between mb-3">
+            <h4 class="text-white font-semibold">Compare Products (${compareList.length}/4)</h4>
+            <button onclick="clearCompare()" class="text-gray-400 hover:text-white">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+        <div class="space-y-2 mb-3">
+            ${compareList.map(item => `
+                <div class="flex items-center space-x-2 text-sm">
+                    <img src="${item.image}" alt="${item.name}" class="w-8 h-8 rounded object-cover">
+                    <span class="text-gray-300 flex-1 truncate">${item.name}</span>
+                    <button onclick="removeFromCompare('${item.id}')" class="text-red-400 hover:text-red-300">
+                        <i data-lucide="trash-2" class="w-3 h-3"></i>
+                    </button>
+                </div>
+            `).join('')}
+        </div>
+        <button onclick="showCompareModal()" class="w-full py-2 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl text-white font-semibold hover:shadow-neon transition-all duration-300">
+            Compare Now
+        </button>
+    `;
+
+    lucide.createIcons();
+}
+
+function hideCompareBar() {
+    const compareBar = document.getElementById('compare-bar');
+    if (compareBar) {
+        compareBar.remove();
+    }
+}
+
+function clearCompare() {
+    localStorage.removeItem('b2battle_compare');
+    updateCompareUI();
+    window.B2Battle?.notifications?.show('Compare list cleared', 'info');
+}
+
+function removeFromCompare(productId) {
+    let compareList = JSON.parse(localStorage.getItem('b2battle_compare') || '[]');
+    compareList = compareList.filter(item => item.id !== productId);
+    localStorage.setItem('b2battle_compare', JSON.stringify(compareList));
+    updateCompareUI();
+}
+
+// Utility functions for backward compatibility
+function addToCart(productId, productName, price, quantity, imageUrl = '') {
+    if (window.B2Battle?.cart) {
+        return window.B2Battle.cart.addItem(productId, productName, price, quantity, imageUrl);
+    }
+
+    // Fallback implementation
+    let cart = JSON.parse(localStorage.getItem('b2battle_cart') || '[]');
+    const numericPrice = parseFloat(price);
+    const numericQuantity = parseInt(quantity);
+
+    const existingItem = cart.find(item => item.name === productName);
+    if (existingItem) {
+        existingItem.quantity = parseInt(existingItem.quantity) + numericQuantity;
+    } else {
+        cart.push({
+            id: productId,
+            name: productName,
+            price: numericPrice,
+            quantity: numericQuantity,
+            imageUrl: imageUrl
+        });
+    }
+
+    localStorage.setItem('b2battle_cart', JSON.stringify(cart));
+    updateCartCount();
+}
+
+function updateCartCount() {
+    if (window.B2Battle?.cart) {
+        window.B2Battle.cart.updateUI();
+    } else {
+        // Fallback
+        const cart = JSON.parse(localStorage.getItem('b2battle_cart') || '[]');
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+        const cartCountElement = document.querySelector('.cart-count');
+        if (cartCountElement) {
+            cartCountElement.textContent = totalItems;
+            cartCountElement.style.display = totalItems > 0 ? 'block' : 'none';
+        }
+    }
+}
+
+function showNotification(message, type = 'info') {
+    if (window.B2Battle?.notifications) {
+        return window.B2Battle.notifications.show(message, type);
+    }
+
+    // Fallback notification system
+    const notification = document.createElement('div');
+    notification.className = `fixed top-20 right-4 z-50 px-6 py-3 rounded-xl text-white font-semibold transform translate-x-full transition-transform duration-300`;
+
+    switch(type) {
+        case 'success':
+            notification.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            break;
+        case 'warning':
+            notification.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+            break;
+        case 'error':
+            notification.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+            break;
+        default:
+            notification.style.background = 'linear-gradient(135deg, #8b5cf6, #7c3aed)';
+    }
+
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+    setTimeout(() => {
+        notification.style.transform = 'translateX(full)';
+        setTimeout(() => {
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Initialize enhanced product page
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize compare system
+    updateCompareUI();
+
+    // Setup keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        // Press 'C' to clear compare
+        if (e.key === 'c' && e.ctrlKey) {
+            e.preventDefault();
+            clearCompare();
+        }
+
+        // Press 'F' to focus filter
+        if (e.key === 'f' && e.ctrlKey) {
+            e.preventDefault();
+            const firstFilter = document.querySelector('.filter-btn');
+            if (firstFilter) firstFilter.focus();
+        }
+    });
+
+    // Setup intersection observer for product animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.product-card, .group.hover-lift').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'all 0.6s ease-out';
+        observer.observe(card);
+    });
+
+    // Performance monitoring
+    const loadTime = performance.now();
+    console.log(`🎮 Enhanced Products Page loaded in ${Math.round(loadTime)}ms`);
+
+    // Initialize cart count
+    updateCartCount();
+});
+</script>
+{% endblock %}

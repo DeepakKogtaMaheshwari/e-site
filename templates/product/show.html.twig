@@ -1,0 +1,578 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }} - B2Battle Gaming Arsenal{% endblock %}
+
+{% block body %}
+<!-- Ultra Modern Product Detail Page -->
+<section class="py-16 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-gradient-to-r from-neon-purple/10 via-transparent to-neon-pink/10"></div>
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-neon-purple/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-neon-pink/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center space-x-2 text-sm mb-8 animate-slide-up">
+            <a href="{{ path('app_home') }}" class="flex items-center space-x-1 text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="home" class="w-4 h-4"></i>
+                <span>Home</span>
+            </a>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-600"></i>
+            <a href="{{ path('app_products') }}" class="flex items-center space-x-1 text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="gamepad-2" class="w-4 h-4"></i>
+                <span>Arsenal</span>
+            </a>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-600"></i>
+            <span class="text-white font-semibold">{{ product.name|length > 30 ? product.name|slice(0, 30) ~ '...' : product.name }}</span>
+        </nav>
+
+        <!-- Product Detail Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <!-- Product Image -->
+            <div class="animate-slide-up">
+                <div class="glass-morphism rounded-3xl p-8 hover-lift">
+                    <!-- Product Badges -->
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex space-x-2">
+                            <span class="px-3 py-1 bg-gradient-to-r from-neon-green to-neon-blue rounded-full text-white text-sm font-bold">
+                                PRO GRADE
+                            </span>
+                            <span class="px-3 py-1 bg-gradient-to-r from-neon-yellow to-neon-pink rounded-full text-white text-sm font-bold animate-pulse">
+                                IN STOCK
+                            </span>
+                        </div>
+                        <button class="wishlist-btn w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-colors group"
+                                data-wishlist-id="{{ product.id }}"
+                                data-wishlist-name="{{ product.name }}"
+                                data-wishlist-price="{{ product.price }}"
+                                data-wishlist-image="{{ product.imageUrl }}"
+                                data-tooltip="Add to Wishlist"
+                                onclick="handleWishlistToggle(this)">
+                            <i data-lucide="heart" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <!-- Main Product Image -->
+                    <div class="relative mb-6">
+                        {% if product.imageUrl %}
+                            <img src="{{ product.imageUrl }}" alt="{{ product.name }}" class="w-full h-96 object-cover rounded-2xl shadow-glass">
+                        {% else %}
+                            <div class="w-full h-96 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="gamepad-2" class="w-24 h-24 text-gray-600"></i>
+                            </div>
+                        {% endif %}
+
+                        <!-- Image Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+
+                        <!-- Zoom Button -->
+                        <button class="absolute top-4 right-4 w-10 h-10 bg-black/50 rounded-xl flex items-center justify-center text-white hover:bg-black/70 transition-colors">
+                            <i data-lucide="zoom-in" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+
+                    <!-- Thumbnail Gallery -->
+                    <div class="grid grid-cols-4 gap-3">
+                        {% for i in 1..4 %}
+                            <div class="aspect-square bg-white/10 rounded-xl flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors">
+                                {% if product.imageUrl and i == 1 %}
+                                    <img src="{{ product.imageUrl }}" alt="Thumbnail {{ i }}" class="w-full h-full object-cover rounded-xl">
+                                {% else %}
+                                    <i data-lucide="image" class="w-6 h-6 text-gray-400"></i>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Information -->
+            <div class="animate-slide-up" style="animation-delay: 0.2s;">
+                <div class="glass-morphism rounded-3xl p-8">
+                    <!-- Product Title -->
+                    <h1 class="font-display font-bold text-4xl md:text-5xl text-white mb-4">
+                        {{ product.name }}
+                    </h1>
+
+                    <!-- Rating -->
+                    <div class="flex items-center mb-6">
+                        <div class="flex text-neon-yellow mr-3">
+                            {% for i in 1..5 %}
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            {% endfor %}
+                        </div>
+                        <span class="text-white font-semibold">4.9</span>
+                        <span class="text-gray-400 ml-2">({{ random(100, 500) }} reviews)</span>
+                        <span class="text-gray-400 ml-4">•</span>
+                        <span class="text-neon-green ml-4 font-semibold">{{ random(50, 200) }} sold</span>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-8">
+                        <div class="flex items-baseline space-x-4">
+                            <div class="text-4xl font-bold bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent">
+                                {{ product.formattedPrice }}
+                            </div>
+                            <div class="text-xl text-gray-500 line-through">
+                                ₹{{ (product.price * 1.2)|number_format(0, '', ',') }}
+                            </div>
+                            <div class="px-3 py-1 bg-gradient-to-r from-neon-green to-neon-blue rounded-full text-white text-sm font-bold">
+                                17% OFF
+                            </div>
+                        </div>
+                        <p class="text-gray-400 mt-2">Inclusive of all taxes • Free shipping</p>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-white mb-4">Product Description</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            {{ product.description }}
+                        </p>
+                    </div>
+
+                    <!-- Product Features -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-white mb-4">Key Features</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="zap" class="w-5 h-5 text-neon-yellow"></i>
+                                <span class="text-gray-300">Lightning Fast</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-neon-green"></i>
+                                <span class="text-gray-300">1 Year Warranty</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="truck" class="w-5 h-5 text-neon-blue"></i>
+                                <span class="text-gray-300">Free Express Delivery</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="refresh-cw" class="w-5 h-5 text-neon-pink"></i>
+                                <span class="text-gray-300">30-Day Returns</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="mb-8 p-4 bg-white/5 rounded-2xl">
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <span class="text-gray-400">Product ID:</span>
+                                <span class="text-white font-semibold ml-2">#B2B{{ product.id }}</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400">Category:</span>
+                                <span class="text-white font-semibold ml-2">Gaming Gear</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400">Brand:</span>
+                                <span class="text-white font-semibold ml-2">B2Battle</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400">Added:</span>
+                                <span class="text-white font-semibold ml-2">{{ product.createdAt|date('M d, Y') }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quantity Selector -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-white mb-4">Quantity</h3>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-3 bg-white/10 rounded-xl p-2">
+                                <button id="quantity-minus" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+                                    <i data-lucide="minus" class="w-4 h-4"></i>
+                                </button>
+                                <span id="quantity-display" class="text-white font-bold text-lg px-4">1</span>
+                                <button id="quantity-plus" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            <span class="text-gray-400" id="stock-info">{{ random(5, 20) }} pieces available</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="space-y-4">
+                        <a href="{{ path('app_checkout', {id: product.id}) }}" id="buy-now-btn" class="w-full py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-bold text-lg hover:shadow-neon-lg transition-all duration-300 group flex items-center justify-center">
+                            <span class="flex items-center space-x-3">
+                                <i data-lucide="zap" class="w-6 h-6"></i>
+                                <span>Buy Now - Lightning Checkout</span>
+                                <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </a>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <button id="add-to-cart-btn" class="py-3 glass-dark rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-300 flex items-center justify-center space-x-2">
+                                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                                <span>Add to Cart</span>
+                            </button>
+                            <a href="{{ path('app_products') }}" class="py-3 glass-dark rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-300 flex items-center justify-center space-x-2">
+                                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                                <span>Back to Arsenal</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Products Section -->
+<section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-4">
+                <span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Complete Your
+                </span>
+                <br>
+                <span class="bg-gradient-to-r from-neon-purple via-neon-pink to-neon-blue bg-clip-text text-transparent">
+                    Battle Setup
+                </span>
+            </h2>
+            <p class="text-xl text-gray-400">Recommended gear to dominate every game mode</p>
+        </div>
+
+        <div class="glass-morphism rounded-3xl p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {% for i in 1..3 %}
+                    <div class="group hover-lift">
+                        <div class="bg-white/5 rounded-2xl p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="gamepad-2" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">Gaming Accessory {{ i }}</h3>
+                            <p class="text-gray-400 text-sm mb-4">Perfect companion for your setup</p>
+                            <div class="text-xl font-bold bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent mb-4">
+                                ₹{{ random(2999, 9999) }}
+                            </div>
+                            <button class="w-full py-2 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl text-white font-semibold hover:shadow-neon transition-all duration-300">
+                                Add to Setup
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Initialize Lucide Icons
+lucide.createIcons();
+
+// Enhanced Product Detail Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    let quantity = 1;
+    const maxQuantity = {{ random(5, 20) }};
+    const productPrice = {{ product.price }};
+    const productId = {{ product.id }};
+    const productName = "{{ product.name|e('js') }}";
+    const productImage = "{{ product.imageUrl|e('js') }}";
+
+    // Quantity controls
+    const quantityDisplay = document.getElementById('quantity-display');
+    const quantityMinus = document.getElementById('quantity-minus');
+    const quantityPlus = document.getElementById('quantity-plus');
+    const stockInfo = document.getElementById('stock-info');
+
+    // Enhanced quantity update with real-time pricing
+    function updateQuantity() {
+        quantityDisplay.textContent = quantity;
+        stockInfo.textContent = `${maxQuantity - quantity + 1} pieces available`;
+
+        // Update button states with smooth transitions
+        quantityMinus.style.opacity = quantity <= 1 ? '0.5' : '1';
+        quantityMinus.style.cursor = quantity <= 1 ? 'not-allowed' : 'pointer';
+        quantityPlus.style.opacity = quantity >= maxQuantity ? '0.5' : '1';
+        quantityPlus.style.cursor = quantity >= maxQuantity ? 'not-allowed' : 'pointer';
+
+        // Update total price display if exists
+        updatePriceDisplay();
+
+        // Update stock status
+        updateStockStatus();
+    }
+
+    function updatePriceDisplay() {
+        const totalPrice = productPrice * quantity;
+        const priceElements = document.querySelectorAll('.dynamic-price');
+
+        priceElements.forEach(element => {
+            element.textContent = `₹${totalPrice.toLocaleString()}`;
+        });
+
+        // Update savings calculation
+        const savings = (productPrice * quantity * 0.2);
+        const savingsElements = document.querySelectorAll('.dynamic-savings');
+        savingsElements.forEach(element => {
+            element.textContent = `₹${savings.toLocaleString()}`;
+        });
+    }
+
+    function updateStockStatus() {
+        const remaining = maxQuantity - quantity + 1;
+        const stockElement = document.getElementById('stock-info');
+
+        if (remaining <= 5) {
+            stockElement.className = 'text-red-400 font-semibold animate-pulse';
+            stockElement.innerHTML = `⚠️ Only ${remaining} left in stock!`;
+        } else if (remaining <= 10) {
+            stockElement.className = 'text-yellow-400 font-semibold';
+            stockElement.innerHTML = `⚡ ${remaining} pieces available`;
+        } else {
+            stockElement.className = 'text-gray-400';
+            stockElement.innerHTML = `✓ ${remaining} pieces available`;
+        }
+    }
+
+    // Quantity minus
+    quantityMinus.addEventListener('click', function() {
+        if (quantity > 1) {
+            quantity--;
+            updateQuantity();
+            showNotification('Quantity updated', 'success');
+        }
+    });
+
+    // Quantity plus
+    quantityPlus.addEventListener('click', function() {
+        if (quantity < maxQuantity) {
+            quantity++;
+            updateQuantity();
+            showNotification('Quantity updated', 'success');
+        } else {
+            showNotification('Maximum quantity reached', 'warning');
+        }
+    });
+
+    // Enhanced Add to Cart functionality
+    document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+        const button = this;
+        const originalContent = button.innerHTML;
+
+        // Validate quantity
+        if (quantity > maxQuantity) {
+            window.B2Battle?.notifications?.show('Quantity exceeds available stock', 'warning');
+            return;
+        }
+
+        // Enhanced loading state with progress
+        button.innerHTML = `
+            <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>Adding to cart...</span>
+            </div>
+        `;
+        button.disabled = true;
+        button.style.opacity = '0.7';
+
+        // Simulate realistic API call timing
+        setTimeout(() => {
+            // Use B2Battle cart system
+            if (window.B2Battle?.cart) {
+                const success = window.B2Battle.cart.addItem(productId, productName, productPrice, quantity, productImage);
+
+                if (success) {
+                    // Enhanced success state
+                    button.innerHTML = `
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                            <span>Added to Cart!</span>
+                        </div>
+                    `;
+                    button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+
+                    // Show detailed notification
+                    const totalPrice = productPrice * quantity;
+                    window.B2Battle.notifications.show(
+                        `${quantity}x ${productName} added for ₹${totalPrice.toLocaleString()}`,
+                        'success'
+                    );
+
+                    // Update UI elements
+                    updateCartRelatedUI();
+
+                } else {
+                    // Error state
+                    button.innerHTML = `
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="alert-circle" class="w-5 h-5 text-red-400"></i>
+                            <span>Error</span>
+                        </div>
+                    `;
+                    button.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+                }
+            } else {
+                // Fallback
+                addToCart(productId, productName, productPrice, quantity, productImage);
+                showNotification(`${quantity} item(s) added to cart!`, 'success');
+            }
+
+            // Reset button after delay
+            setTimeout(() => {
+                button.innerHTML = originalContent;
+                button.disabled = false;
+                button.style.opacity = '1';
+                button.style.background = '';
+                lucide.createIcons();
+            }, 2500);
+        }, 800);
+    });
+
+    function updateCartRelatedUI() {
+        // Update any cart-related displays on the page
+        const cartCount = window.B2Battle?.cart?.getItemCount() || 0;
+
+        // Update cart indicators
+        document.querySelectorAll('.cart-indicator').forEach(indicator => {
+            indicator.textContent = cartCount;
+            indicator.style.display = cartCount > 0 ? 'block' : 'none';
+        });
+
+        // Update "items in cart" displays
+        document.querySelectorAll('.items-in-cart').forEach(element => {
+            element.textContent = `${cartCount} items in cart`;
+        });
+    }
+
+    // Wishlist functionality
+    const wishlistBtn = document.querySelector('[data-lucide="heart"]')?.parentElement;
+    if (wishlistBtn) {
+        wishlistBtn.addEventListener('click', function() {
+            const icon = this.querySelector('[data-lucide]');
+            const isWishlisted = icon.getAttribute('data-lucide') === 'heart';
+
+            if (isWishlisted) {
+                icon.setAttribute('data-lucide', 'heart');
+                icon.style.fill = '#f472b6';
+                icon.style.color = '#f472b6';
+                showNotification('Added to wishlist!', 'success');
+            } else {
+                icon.setAttribute('data-lucide', 'heart');
+                icon.style.fill = 'none';
+                icon.style.color = 'white';
+                showNotification('Removed from wishlist', 'info');
+            }
+            lucide.createIcons();
+        });
+    }
+
+    // Image zoom functionality
+    const zoomBtn = document.querySelector('[data-lucide="zoom-in"]')?.parentElement;
+    if (zoomBtn) {
+        zoomBtn.addEventListener('click', function() {
+            const img = document.querySelector('img[alt="{{ product.name }}"]');
+            if (img) {
+                // Create modal for image zoom
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4';
+                modal.innerHTML = `
+                    <div class="relative max-w-4xl max-h-full">
+                        <img src="${img.src}" alt="{{ product.name }}" class="max-w-full max-h-full object-contain rounded-2xl">
+                        <button class="absolute top-4 right-4 w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white hover:bg-white/30 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+
+                document.body.appendChild(modal);
+
+                // Close modal
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal || e.target.closest('button')) {
+                        document.body.removeChild(modal);
+                    }
+                });
+            }
+        });
+    }
+
+    // Initialize
+    updateQuantity();
+});
+
+// Cart management functions
+function addToCart(productId, productName, price, quantity) {
+    let cart = JSON.parse(localStorage.getItem('b2battle_cart') || '[]');
+
+    // Ensure proper data types
+    const numericPrice = parseFloat(price);
+    const numericQuantity = parseInt(quantity);
+    const numericId = parseInt(productId);
+
+    const existingItem = cart.find(item => parseInt(item.id) === numericId);
+    if (existingItem) {
+        existingItem.quantity = parseInt(existingItem.quantity) + numericQuantity;
+    } else {
+        cart.push({
+            id: numericId,
+            name: productName,
+            price: numericPrice,
+            quantity: numericQuantity
+        });
+    }
+
+    localStorage.setItem('b2battle_cart', JSON.stringify(cart));
+    updateCartCount();
+}
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('b2battle_cart') || '[]');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Update cart count in navigation if exists
+    const cartCountElement = document.querySelector('.cart-count');
+    if (cartCountElement) {
+        cartCountElement.textContent = totalItems;
+        cartCountElement.style.display = totalItems > 0 ? 'block' : 'none';
+    }
+}
+
+// Notification system
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `fixed top-20 right-4 z-50 px-6 py-3 rounded-xl text-white font-semibold transform translate-x-full transition-transform duration-300`;
+
+    switch(type) {
+        case 'success':
+            notification.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            break;
+        case 'warning':
+            notification.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+            break;
+        case 'error':
+            notification.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+            break;
+        default:
+            notification.style.background = 'linear-gradient(135deg, #8b5cf6, #7c3aed)';
+    }
+
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+
+    // Animate out and remove
+    setTimeout(() => {
+        notification.style.transform = 'translateX(full)';
+        setTimeout(() => {
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Initialize cart count on page load
+updateCartCount();
+</script>
+{% endblock %}
