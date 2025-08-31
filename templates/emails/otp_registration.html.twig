@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your B2Battle Account</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1e293b;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            background: linear-gradient(135deg, #10b981 0%, #00f5ff 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        .header-text {
+            color: #000000;
+            font-size: 18px;
+            margin: 0;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .welcome {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        .message {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+        .otp-container {
+            background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+            border: 2px solid #10b981;
+        }
+        .otp-label {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .otp-code {
+            font-size: 36px;
+            font-weight: bold;
+            color: #10b981;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 8px;
+            margin: 10px 0;
+        }
+        .otp-validity {
+            font-size: 14px;
+            color: #f59e0b;
+            margin-top: 15px;
+        }
+        .instructions {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #00f5ff;
+        }
+        .instructions h3 {
+            color: #00f5ff;
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .instructions ul {
+            color: #cbd5e1;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        .security-notice {
+            background: #7f1d1d;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #ef4444;
+        }
+        .security-notice h3 {
+            color: #fca5a5;
+            margin-top: 0;
+            font-size: 16px;
+        }
+        .security-notice p {
+            color: #fecaca;
+            margin: 0;
+            font-size: 14px;
+        }
+        .footer {
+            background: #0f172a;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #374151;
+        }
+        .footer-text {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .social-links {
+            margin: 20px 0;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #10b981;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .company-info {
+            color: #4b5563;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            .header, .content, .footer {
+                padding: 20px;
+            }
+            .otp-code {
+                font-size: 28px;
+                letter-spacing: 4px;
+            }
+            .welcome {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">⚔️ B2Battle</div>
+            <p class="header-text">Professional Electronics Store</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h1 class="welcome">Welcome to B2Battle!</h1>
+            
+            <p class="message">
+                Hi {{ user_name ?? 'there' }},<br><br>
+                Thank you for registering with B2Battle Electronics! To complete your account setup and start shopping for premium electronics, please verify your email address using the code below.
+            </p>
+
+            <!-- OTP Code -->
+            <div class="otp-container">
+                <div class="otp-label">Your Verification Code</div>
+                <div class="otp-code">{{ otp_code }}</div>
+                <div class="otp-validity">⏰ Expires in {{ expires_in_minutes }} minutes</div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <h3>🔐 How to verify your account:</h3>
+                <ul>
+                    <li>Go back to the B2Battle verification page</li>
+                    <li>Enter the 6-digit code: <strong>{{ otp_code }}</strong></li>
+                    <li>Click "Verify Email" to complete the process</li>
+                    <li>Start shopping for premium electronics!</li>
+                </ul>
+            </div>
+
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <h3>🛡️ Security Notice</h3>
+                <p>
+                    This code is valid for {{ expires_in_minutes }} minutes only. Never share this code with anyone. 
+                    B2Battle will never ask for your verification code via phone or email.
+                </p>
+            </div>
+
+            <p class="message">
+                If you didn't create an account with B2Battle, please ignore this email or contact our support team.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="footer-text">
+                Need help? Contact our support team at <a href="mailto:support@b2battle.com" style="color: #10b981;">support@b2battle.com</a>
+            </p>
+            
+            <div class="social-links">
+                <a href="#">Website</a> |
+                <a href="#">Support</a> |
+                <a href="#">Privacy Policy</a>
+            </div>
+
+            <div class="company-info">
+                <p>B2Battle Electronics - Professional Gaming & Electronics Store</p>
+                <p>This email was sent to {{ user_email ?? 'your email' }}</p>
+                <p>&copy; {{ 'now'|date('Y') }} B2Battle. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

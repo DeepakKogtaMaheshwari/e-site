@@ -1,0 +1,232 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Account - Join B2Battle Electronics{% endblock %}
+
+{% block body %}
+<!-- Ultra Modern Registration Header -->
+<section class="py-16 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-gradient-to-r from-neon-green/10 via-transparent to-neon-blue/10"></div>
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-neon-green/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-neon-blue/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-2xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent mb-4">
+                    Join B2Battle
+                </h1>
+                <p class="text-xl text-gray-300">
+                    Create your account and get access to premium electronics with fast delivery
+                </p>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border border-gray-800 shadow-2xl">
+                {{ form_start(registrationForm, {'attr': {'class': 'space-y-6'}}) }}
+                
+                <!-- Flash Messages -->
+                {% for message in app.flashes('error') %}
+                    <div class="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-xl">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                <!-- Personal Information -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                        <i data-lucide="user" class="w-5 h-5 mr-2 text-neon-green"></i>
+                        Personal Information
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            {{ form_label(registrationForm.firstName, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                            {{ form_widget(registrationForm.firstName) }}
+                            {{ form_errors(registrationForm.firstName) }}
+                        </div>
+                        <div>
+                            {{ form_label(registrationForm.lastName, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                            {{ form_widget(registrationForm.lastName) }}
+                            {{ form_errors(registrationForm.lastName) }}
+                        </div>
+                    </div>
+
+                    <div>
+                        {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                        {{ form_widget(registrationForm.email) }}
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(registrationForm.mobile, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                        {{ form_widget(registrationForm.mobile) }}
+                        {{ form_errors(registrationForm.mobile) }}
+                    </div>
+                </div>
+
+                <!-- Delivery Address -->
+                <div class="space-y-6 pt-6 border-t border-gray-700">
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                        <i data-lucide="map-pin" class="w-5 h-5 mr-2 text-neon-blue"></i>
+                        Delivery Address
+                    </h3>
+
+                    <div>
+                        {{ form_label(registrationForm.streetAddress, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                        {{ form_widget(registrationForm.streetAddress) }}
+                        {{ form_errors(registrationForm.streetAddress) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(registrationForm.landmark, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                        {{ form_widget(registrationForm.landmark) }}
+                        {{ form_errors(registrationForm.landmark) }}
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            {{ form_label(registrationForm.city, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                            {{ form_widget(registrationForm.city) }}
+                            {{ form_errors(registrationForm.city) }}
+                        </div>
+                        <div>
+                            {{ form_label(registrationForm.state, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                            {{ form_widget(registrationForm.state) }}
+                            {{ form_errors(registrationForm.state) }}
+                        </div>
+                    </div>
+
+                    <div>
+                        {{ form_label(registrationForm.postalCode, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                        {{ form_widget(registrationForm.postalCode) }}
+                        {{ form_errors(registrationForm.postalCode) }}
+                    </div>
+                </div>
+
+                <!-- Security -->
+                <div class="space-y-6 pt-6 border-t border-gray-700">
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                        <i data-lucide="shield" class="w-5 h-5 mr-2 text-yellow-400"></i>
+                        Account Security
+                    </h3>
+
+                    <div>
+                        {{ form_label(registrationForm.plainPassword.first, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                        {{ form_widget(registrationForm.plainPassword.first) }}
+                        {{ form_errors(registrationForm.plainPassword.first) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(registrationForm.plainPassword.second, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+                        {{ form_widget(registrationForm.plainPassword.second) }}
+                        {{ form_errors(registrationForm.plainPassword.second) }}
+                    </div>
+                </div>
+
+                <!-- Terms Agreement -->
+                <div class="pt-6 border-t border-gray-700">
+                    <div class="flex items-start space-x-3">
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                        <div class="flex-1">
+                            {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'text-sm text-gray-300 cursor-pointer'}}) }}
+                            {{ form_errors(registrationForm.agreeTerms) }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-6">
+                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-neon-green to-neon-blue rounded-2xl text-black font-bold text-lg hover:shadow-lg hover:shadow-neon-green/25 transition-all duration-300 transform hover:scale-105">
+                        <span class="flex items-center justify-center space-x-3">
+                            <i data-lucide="user-plus" class="w-6 h-6"></i>
+                            <span>Create My Account</span>
+                        </span>
+                    </button>
+                </div>
+
+                {{ form_end(registrationForm) }}
+
+                <!-- Login Link -->
+                <div class="text-center pt-6 border-t border-gray-700">
+                    <p class="text-gray-400">
+                        Already have an account? 
+                        <a href="{{ path('app_login') }}" class="text-neon-green hover:text-neon-blue transition-colors duration-300 font-semibold">
+                            Sign In
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-16 bg-gray-900/50">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-r from-neon-green to-neon-blue rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="truck" class="w-8 h-8 text-black"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">Fast Delivery</h3>
+                <p class="text-gray-400">Get your electronics delivered within 24-48 hours</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-r from-neon-blue to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="shield-check" class="w-8 h-8 text-black"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">Secure Shopping</h3>
+                <p class="text-gray-400">Your personal and payment information is always protected</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="headphones" class="w-8 h-8 text-black"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">24/7 Support</h3>
+                <p class="text-gray-400">Get help whenever you need it from our expert team</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Lucide icons
+    lucide.createIcons();
+    
+    // Form validation enhancements
+    const form = document.querySelector('form');
+    const inputs = form.querySelectorAll('input, select, textarea');
+    
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.value.trim() !== '') {
+                this.classList.add('border-neon-green/50');
+                this.classList.remove('border-gray-700');
+            } else {
+                this.classList.remove('border-neon-green/50');
+                this.classList.add('border-gray-700');
+            }
+        });
+    });
+    
+    // Mobile number validation
+    const mobileInput = document.querySelector('input[name="registration_form[mobile]"]');
+    if (mobileInput) {
+        mobileInput.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').substring(0, 10);
+        });
+    }
+    
+    // Postal code validation
+    const postalInput = document.querySelector('input[name="registration_form[postalCode]"]');
+    if (postalInput) {
+        postalInput.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').substring(0, 6);
+        });
+    }
+});
+</script>
+{% endblock %}

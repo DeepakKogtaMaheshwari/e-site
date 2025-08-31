@@ -14,7 +14,215 @@
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
         <!-- Lucide Icons -->
-        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js?v={{ 'now'|date('U') }}"></script>
+
+        <!-- Essential Functions - Load First -->
+        <script>
+            // Define essential functions immediately
+            window.addToCart = function(productId, quantity = 1) {
+                console.log('🛒 Adding to cart:', productId, 'quantity:', quantity);
+
+                // Show loading notification
+                if (window.showNotification) {
+                    window.showNotification('Adding to cart...', 'info');
+                }
+
+                fetch(`/cart/add/${productId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: `quantity=${quantity}`
+                })
+                .then(response => {
+                    console.log('🛒 Response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('🛒 Cart response:', data);
+                    if (data.success) {
+                        if (window.updateCartCount) {
+                            window.updateCartCount();
+                        }
+                        if (window.showNotification) {
+                            window.showNotification(data.message || 'Product added to cart!', 'success');
+                        }
+                    } else {
+                        if (window.showNotification) {
+                            window.showNotification(data.message || 'Failed to add product to cart', 'error');
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('🛒 Error adding to cart:', error);
+                    if (window.showNotification) {
+                        window.showNotification('Failed to add item to cart. Please try again.', 'error');
+                    }
+                });
+            };
+
+            // Update cart count function
+            window.updateCartCount = function() {
+                console.log('🛒 Updating cart count...');
+                fetch('/cart/count')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('🛒 Cart count data:', data);
+                        const cartCountElements = document.querySelectorAll('.cart-count');
+                        console.log('🛒 Found cart count elements:', cartCountElements.length);
+
+                        cartCountElements.forEach(cartCount => {
+                            if (data.count > 0) {
+                                cartCount.textContent = data.count;
+                                cartCount.style.display = 'flex';
+                            } else {
+                                cartCount.style.display = 'none';
+                            }
+                        });
+
+                        if (cartCountElements.length === 0) {
+                            console.warn('🛒 No cart count elements found');
+                        }
+                    })
+                    .catch(error => console.error('🛒 Error updating cart count:', error));
+            };
+
+            // Show notification function
+            window.showNotification = function(message, type = 'info') {
+                console.log('📢 Showing notification:', message, type);
+
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-xl text-white font-medium transform translate-x-full transition-transform duration-300 ${
+                    type === 'success' ? 'bg-green-500' :
+                    type === 'error' ? 'bg-red-500' :
+                    'bg-blue-500'
+                }`;
+                notification.textContent = message;
+
+                document.body.appendChild(notification);
+
+                // Slide in
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 100);
+
+                // Slide out and remove
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            };
+
+            // Server-side wishlist functionality
+            window.toggleWishlist = function(productId) {
+                console.log('❤️ Toggling wishlist for product:', productId);
+
+                fetch(`/wishlist/toggle/${productId}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.showNotification(data.message, data.in_wishlist ? 'success' : 'info');
+                        updateWishlistButton(productId, data.in_wishlist);
+                    } else {
+                        window.showNotification(data.message || 'Failed to update wishlist', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('❤️ Error toggling wishlist:', error);
+                    window.showNotification('Failed to update wishlist', 'error');
+                });
+            };
+
+            // Update single wishlist button
+            function updateWishlistButton(productId, inWishlist) {
+                document.querySelectorAll(`[data-wishlist-id="${productId}"]`).forEach(button => {
+                    const icon = button.querySelector('[data-lucide="heart"]');
+
+                    if (inWishlist) {
+                        button.classList.add('text-red-500');
+                        button.classList.remove('text-gray-400');
+                        if (icon) {
+                            icon.style.fill = 'currentColor';
+                        }
+                    } else {
+                        button.classList.remove('text-red-500');
+                        button.classList.add('text-gray-400');
+                        if (icon) {
+                            icon.style.fill = 'none';
+                        }
+                    }
+                });
+            }
+
+            // Update wishlist icons (placeholder for now)
+            window.updateWishlistIcons = function() {
+                // This would need to fetch wishlist status from server
+                // For now, we'll just re-initialize icons
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            };
+
+            // Search functionality
+            window.performSearch = function(query) {
+                console.log('🔍 Searching for:', query);
+                if (query.trim()) {
+                    window.location.href = `/products/search?q=${encodeURIComponent(query.trim())}`;
+                }
+            };
+
+            // Simple icon initialization
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+
+                // Initialize cart count and wishlist on page load
+                console.log('🛒 Page loaded, initializing cart count and wishlist...');
+                initializePageFeatures();
+            });
+
+            // Also initialize on window load as backup
+            window.addEventListener('load', function() {
+                initializePageFeatures();
+            });
+
+            // Initialize page features function
+            function initializePageFeatures() {
+                if (window.updateCartCount) {
+                    window.updateCartCount();
+                } else {
+                    console.error('🛒 updateCartCount function not found');
+                }
+
+                if (window.updateWishlistIcons) {
+                    window.updateWishlistIcons();
+                }
+
+                // Re-initialize icons
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }
+        </script>
 
         <script>
             tailwind.config = {
@@ -240,6 +448,64 @@
                 .glass-morphism { backdrop-filter: blur(8px); }
                 .hover-lift:hover { transform: translateY(-4px); }
             }
+
+            /* Icon fallbacks - show emoji when Lucide icons don't load */
+            [data-lucide]:empty::before {
+                font-family: system-ui, -apple-system, sans-serif;
+                font-size: 1em;
+                line-height: 1;
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                text-align: center;
+            }
+
+            /* Specific icon fallbacks with emojis */
+            [data-lucide="shopping-cart"]:empty::before { content: "🛒"; }
+            [data-lucide="user"]:empty::before { content: "👤"; }
+            [data-lucide="search"]:empty::before { content: "🔍"; }
+            [data-lucide="menu"]:empty::before { content: "☰"; }
+            [data-lucide="x"]:empty::before { content: "✕"; }
+            [data-lucide="heart"]:empty::before { content: "♡"; }
+            [data-lucide="star"]:empty::before { content: "⭐"; }
+            [data-lucide="package"]:empty::before { content: "📦"; }
+            [data-lucide="truck"]:empty::before { content: "🚚"; }
+            [data-lucide="check-circle"]:empty::before { content: "✓"; }
+            [data-lucide="plus"]:empty::before { content: "+"; }
+            [data-lucide="minus"]:empty::before { content: "-"; }
+            [data-lucide="trash-2"]:empty::before { content: "🗑"; }
+            [data-lucide="edit"]:empty::before { content: "✏"; }
+            [data-lucide="eye"]:empty::before { content: "👁"; }
+            [data-lucide="home"]:empty::before { content: "🏠"; }
+            [data-lucide="mail"]:empty::before { content: "✉"; }
+            [data-lucide="phone"]:empty::before { content: "📞"; }
+            [data-lucide="map-pin"]:empty::before { content: "📍"; }
+            [data-lucide="credit-card"]:empty::before { content: "💳"; }
+            [data-lucide="shield-check"]:empty::before { content: "🛡"; }
+            [data-lucide="zap"]:empty::before { content: "⚡"; }
+            [data-lucide="arrow-right"]:empty::before { content: "→"; }
+            [data-lucide="arrow-left"]:empty::before { content: "←"; }
+            [data-lucide="chevron-down"]:empty::before { content: "▼"; }
+            [data-lucide="chevron-up"]:empty::before { content: "▲"; }
+            [data-lucide="check"]:empty::before { content: "✓"; }
+            [data-lucide="loader"]:empty::before { content: "⟳"; animation: spin 1s linear infinite; }
+            [data-lucide="refresh-cw"]:empty::before { content: "⟳"; }
+            [data-lucide="calculator"]:empty::before { content: "🧮"; }
+            [data-lucide="image"]:empty::before { content: "🖼"; }
+            [data-lucide="shopping-bag"]:empty::before { content: "🛍"; }
+            [data-lucide="clock"]:empty::before { content: "🕐"; }
+            [data-lucide="list-checks"]:empty::before { content: "📋"; }
+            [data-lucide="package-check"]:empty::before { content: "📦"; }
+            [data-lucide="indian-rupee"]:empty::before { content: "₹"; }
+            [data-lucide="message-square"]:empty::before { content: "💬"; }
+
+            /* Force icon visibility and proper sizing */
+            [data-lucide] {
+                display: inline-block !important;
+                min-width: 1em;
+                min-height: 1em;
+                vertical-align: middle;
+            }
         </style>
         {% endblock %}
     </head>
@@ -285,33 +551,86 @@
                         </div>
                     </div>
 
-                    <!-- Search, Cart & CTA Button -->
+                    <!-- Search, Cart & User Actions -->
                     <div class="hidden md:flex items-center space-x-4">
                         <!-- Search Button -->
-                        <button id="search-trigger" class="relative p-2 text-gray-400 hover:text-white transition-colors group" data-tooltip="Search Products (Ctrl+K)">
-                            <i data-lucide="search" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
-                        </button>
+                        <div class="relative">
+                            <button id="search-trigger" class="relative p-2 text-gray-400 hover:text-white transition-colors group" data-tooltip="Search Products (Ctrl+K)">
+                                <i data-lucide="search" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                            </button>
+                            <!-- Quick Search Form (Hidden by default) -->
+                            <div id="quick-search-form" class="absolute top-full right-0 mt-2 w-80 bg-gray-900 border border-gray-700 rounded-xl p-4 shadow-xl z-50" style="display: none;">
+                                <form onsubmit="event.preventDefault(); performSearch(this.querySelector('input').value);">
+                                    <div class="flex space-x-2">
+                                        <input type="text" placeholder="Search products..." class="flex-1 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                                            <i data-lucide="search" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
 
                         <!-- Wishlist Button -->
-                        <button id="wishlist-btn" class="relative p-2 text-gray-400 hover:text-white transition-colors group" data-tooltip="Wishlist">
+                        <a href="{{ path('app_wishlist') }}" class="relative p-2 text-gray-400 hover:text-red-500 transition-colors group" data-tooltip="My Wishlist">
                             <i data-lucide="heart" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
-                            <span class="wishlist-count absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-r from-neon-pink to-neon-purple rounded-full text-xs font-bold flex items-center justify-center text-white" style="display: none;">0</span>
-                        </button>
+                        </a>
 
                         <!-- Cart Button -->
-                        <button id="cart-btn" class="relative p-2 text-gray-400 hover:text-white transition-colors group" data-tooltip="Shopping Cart">
+                        <a href="{{ path('app_cart') }}" id="cart-btn" class="relative p-2 text-gray-400 hover:text-white transition-colors group" data-tooltip="Shopping Cart">
                             <i data-lucide="shopping-cart" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
                             <span class="cart-count absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-r from-neon-pink to-neon-purple rounded-full text-xs font-bold flex items-center justify-center text-white" style="display: none;">0</span>
-                        </button>
-
-                        <!-- CTA Button -->
-                        <a href="{{ path('app_products') }}" class="relative inline-flex items-center px-6 py-2 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl text-white font-semibold hover:shadow-neon-lg transition-all duration-300 group overflow-hidden">
-                            <span class="relative z-10 flex items-center space-x-2">
-                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                                <span>Shop Now</span>
-                            </span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-neon-pink to-neon-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </a>
+
+                        {% if app.user %}
+                            <!-- User Profile Dropdown -->
+                            <div class="relative group">
+                                <button class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+                                    <div class="w-8 h-8 bg-gradient-to-r from-neon-green to-neon-blue rounded-full flex items-center justify-center">
+                                        <span class="text-sm font-bold text-black">{{ app.user.firstName|first|upper }}</span>
+                                    </div>
+                                    <span class="font-medium">{{ app.user.firstName }}</span>
+                                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                                </button>
+
+                                <!-- Dropdown Menu -->
+                                <div class="absolute right-0 mt-2 w-48 bg-gray-900/95 backdrop-blur-xl rounded-2xl border border-gray-700 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                                    <div class="p-2">
+                                        <a href="{{ path('app_profile') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all duration-300">
+                                            <i data-lucide="user" class="w-4 h-4"></i>
+                                            <span>My Profile</span>
+                                        </a>
+                                        <a href="{{ path('app_profile_orders') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all duration-300">
+                                            <i data-lucide="package" class="w-4 h-4"></i>
+                                            <span>Orders</span>
+                                        </a>
+                                        <a href="{{ path('app_profile_addresses') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all duration-300">
+                                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                            <span>Addresses</span>
+                                        </a>
+                                        <div class="border-t border-gray-700 my-2"></div>
+                                        <a href="{{ path('app_logout') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all duration-300">
+                                            <i data-lucide="log-out" class="w-4 h-4"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <!-- Login/Register Buttons -->
+                            <a href="{{ path('app_login') }}" class="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+                                <i data-lucide="log-in" class="w-4 h-4"></i>
+                                <span class="font-medium">Login</span>
+                            </a>
+
+                            <a href="{{ path('app_register') }}" class="relative inline-flex items-center px-6 py-2 bg-gradient-to-r from-neon-green to-neon-blue rounded-xl text-black font-semibold hover:shadow-lg hover:shadow-neon-green/25 transition-all duration-300 group overflow-hidden">
+                                <span class="relative z-10 flex items-center space-x-2">
+                                    <i data-lucide="user-plus" class="w-4 h-4"></i>
+                                    <span>Sign Up</span>
+                                </span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-neon-blue to-neon-green opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </a>
+                        {% endif %}
                     </div>
 
                     <!-- Enhanced Mobile Actions -->
@@ -327,11 +646,16 @@
                             <span class="wishlist-count absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-neon-pink to-neon-purple rounded-full text-xs font-bold flex items-center justify-center text-white" style="display: none;">0</span>
                         </button>
 
+                        <!-- Mobile Wishlist -->
+                        <a href="{{ path('app_wishlist') }}" class="relative p-2 rounded-xl text-gray-400 hover:text-red-500 hover:bg-white/10 transition-all duration-300" data-tooltip="Wishlist">
+                            <i data-lucide="heart" class="w-5 h-5"></i>
+                        </a>
+
                         <!-- Mobile Cart -->
-                        <button id="mobile-cart-btn" class="relative p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300" data-tooltip="Cart">
+                        <a href="{{ path('app_cart') }}" id="mobile-cart-btn" class="relative p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300" data-tooltip="Cart">
                             <i data-lucide="shopping-cart" class="w-5 h-5"></i>
                             <span class="cart-count absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-neon-pink to-neon-purple rounded-full text-xs font-bold flex items-center justify-center text-white" style="display: none;">0</span>
-                        </button>
+                        </a>
 
                         <!-- Mobile Menu Button -->
                         <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300">
@@ -344,6 +668,37 @@
             <!-- Enhanced Mobile Navigation -->
             <div class="mobile-menu hidden md:hidden glass-dark border-t border-white/10">
                 <div class="px-4 pt-4 pb-6 space-y-4">
+                    {% if app.user %}
+                        <!-- User Profile Section -->
+                        <div class="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-neon-green/20 to-neon-blue/20 rounded-xl border border-neon-green/30">
+                            <div class="w-10 h-10 bg-gradient-to-r from-neon-green to-neon-blue rounded-full flex items-center justify-center">
+                                <span class="text-sm font-bold text-black">{{ app.user.firstName|first|upper }}</span>
+                            </div>
+                            <div>
+                                <p class="text-white font-medium">{{ app.user.fullName }}</p>
+                                <p class="text-gray-400 text-sm">{{ app.user.email }}</p>
+                            </div>
+                        </div>
+
+                        <!-- User Navigation Links -->
+                        <div class="space-y-2">
+                            <a href="{{ path('app_profile') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group">
+                                <i data-lucide="user" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                                <span class="font-medium">My Profile</span>
+                            </a>
+                            <a href="{{ path('app_profile_orders') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group">
+                                <i data-lucide="package" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                                <span class="font-medium">My Orders</span>
+                            </a>
+                            <a href="{{ path('app_profile_addresses') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group">
+                                <i data-lucide="map-pin" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                                <span class="font-medium">Addresses</span>
+                            </a>
+                        </div>
+
+                        <div class="border-t border-white/10 pt-4">
+                    {% endif %}
+
                     <!-- Navigation Links -->
                     <div class="space-y-2">
                         <a href="{{ path('app_home') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group">
@@ -360,6 +715,10 @@
                         </a>
                     </div>
 
+                    {% if app.user %}
+                        </div>
+                    {% endif %}
+
                     <!-- Quick Actions -->
                     <div class="border-t border-white/10 pt-4">
                         <div class="grid grid-cols-2 gap-3">
@@ -374,12 +733,25 @@
                         </div>
                     </div>
 
-                    <!-- Mobile CTA -->
+                    <!-- Authentication Actions -->
                     <div class="border-t border-white/10 pt-4">
-                        <a href="{{ path('app_products') }}" class="flex items-center justify-center space-x-2 w-full px-6 py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-xl text-white font-semibold hover:shadow-neon-lg transition-all duration-300">
-                            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                            <span>Start Shopping</span>
-                        </a>
+                        {% if app.user %}
+                            <a href="{{ path('app_logout') }}" class="flex items-center justify-center space-x-2 w-full px-6 py-4 bg-gradient-to-r from-red-500 to-red-600 rounded-xl text-white font-semibold hover:shadow-lg hover:shadow-red-500/25 transition-all duration-300">
+                                <i data-lucide="log-out" class="w-5 h-5"></i>
+                                <span>Logout</span>
+                            </a>
+                        {% else %}
+                            <div class="space-y-3">
+                                <a href="{{ path('app_login') }}" class="flex items-center justify-center space-x-2 w-full px-6 py-3 bg-white/10 rounded-xl text-white font-medium hover:bg-white/20 transition-all duration-300">
+                                    <i data-lucide="log-in" class="w-5 h-5"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a href="{{ path('app_register') }}" class="flex items-center justify-center space-x-2 w-full px-6 py-4 bg-gradient-to-r from-neon-green to-neon-blue rounded-xl text-black font-semibold hover:shadow-lg hover:shadow-neon-green/25 transition-all duration-300">
+                                    <i data-lucide="user-plus" class="w-5 h-5"></i>
+                                    <span>Create Account</span>
+                                </a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -519,8 +891,8 @@
                 }
 
                 init() {
-                    // Initialize Lucide Icons
-                    lucide.createIcons();
+                    // Initialize Lucide Icons with retry mechanism
+                    this.initializeIcons();
 
                     // Initialize all managers
                     this.cart.init();
@@ -533,6 +905,12 @@
                     this.setupGlobalEvents();
 
                     console.log('🎮 B2Battle Core System Initialized');
+                }
+
+                initializeIcons() {
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
                 }
 
                 setupGlobalEvents() {
@@ -1800,15 +2178,7 @@
                 }
             }
 
-            // Global helper functions for backward compatibility
-            function addToCart(productId, productName, price, quantity = 1, imageUrl = '') {
-                if (window.B2Battle && window.B2Battle.cart) {
-                    return window.B2Battle.cart.addItem(productId, productName, price, quantity, imageUrl);
-                } else {
-                    console.error('B2Battle cart system not initialized');
-                    return false;
-                }
-            }
+            // Removed old addToCart function - using new one below
 
             function updateCartCount() {
                 if (window.B2Battle && window.B2Battle.cart) {
@@ -2000,9 +2370,29 @@
             function setupNavigationFeatures() {
                 // Desktop search trigger
                 const searchTrigger = document.getElementById('search-trigger');
-                if (searchTrigger) {
-                    searchTrigger.addEventListener('click', () => {
-                        window.B2Battle.search.focus();
+                const quickSearchForm = document.getElementById('quick-search-form');
+
+                if (searchTrigger && quickSearchForm) {
+                    searchTrigger.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        console.log('🔍 Search trigger clicked');
+
+                        if (quickSearchForm.style.display === 'none' || !quickSearchForm.style.display) {
+                            quickSearchForm.style.display = 'block';
+                            const input = quickSearchForm.querySelector('input');
+                            if (input) {
+                                setTimeout(() => input.focus(), 100);
+                            }
+                        } else {
+                            quickSearchForm.style.display = 'none';
+                        }
+                    });
+
+                    // Close search form when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!quickSearchForm.contains(e.target) && !searchTrigger.contains(e.target)) {
+                            quickSearchForm.style.display = 'none';
+                        }
                     });
                 }
 
@@ -2325,6 +2715,8 @@
 
                 console.log('⚡ Performance optimizations initialized');
             }
+
+            // Functions moved to top of page for immediate availability
         </script>
 
         {% block javascripts %}{% endblock %}

@@ -195,7 +195,7 @@
 
                     <!-- Action Buttons -->
                     <div class="space-y-4">
-                        <a href="{{ path('app_checkout', {id: product.id}) }}" id="buy-now-btn" class="w-full py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-bold text-lg hover:shadow-neon-lg transition-all duration-300 group flex items-center justify-center">
+                        <a href="{{ path('app_buy_now', {id: product.id}) }}" id="buy-now-btn" class="w-full py-4 bg-gradient-to-r from-neon-purple to-neon-pink rounded-2xl text-white font-bold text-lg hover:shadow-neon-lg transition-all duration-300 group flex items-center justify-center">
                             <span class="flex items-center space-x-3">
                                 <i data-lucide="zap" class="w-6 h-6"></i>
                                 <span>Buy Now - Lightning Checkout</span>
@@ -372,45 +372,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Simulate realistic API call timing
         setTimeout(() => {
-            // Use B2Battle cart system
-            if (window.B2Battle?.cart) {
-                const success = window.B2Battle.cart.addItem(productId, productName, productPrice, quantity, productImage);
-
-                if (success) {
-                    // Enhanced success state
-                    button.innerHTML = `
-                        <div class="flex items-center space-x-2">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
-                            <span>Added to Cart!</span>
-                        </div>
-                    `;
-                    button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-
-                    // Show detailed notification
-                    const totalPrice = productPrice * quantity;
-                    window.B2Battle.notifications.show(
-                        `${quantity}x ${productName} added for ₹${totalPrice.toLocaleString()}`,
-                        'success'
-                    );
-
-                    // Update UI elements
-                    updateCartRelatedUI();
-
-                } else {
-                    // Error state
-                    button.innerHTML = `
-                        <div class="flex items-center space-x-2">
-                            <i data-lucide="alert-circle" class="w-5 h-5 text-red-400"></i>
-                            <span>Error</span>
-                        </div>
-                    `;
-                    button.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
-                }
+            // Add to cart using our cart system
+            console.log('🛒 Adding product to cart:', {{ product.id }}, 'quantity:', quantity);
+            if (typeof window.addToCart === 'function') {
+                window.addToCart({{ product.id }}, quantity);
             } else {
-                // Fallback
-                addToCart(productId, productName, productPrice, quantity, productImage);
-                showNotification(`${quantity} item(s) added to cart!`, 'success');
+                console.error('🛒 addToCart function not found');
+                alert('Add to cart function not available. Please refresh the page.');
             }
+
+            // Show success state
+            button.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                    <span>Added to Cart!</span>
+                </div>
+            `;
+            button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
 
             // Reset button after delay
             setTimeout(() => {

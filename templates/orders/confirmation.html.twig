@@ -1,0 +1,242 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order Confirmation - {{ order.orderNumber }} | B2Battle{% endblock %}
+
+{% block body %}
+<!-- Order Confirmation Header -->
+<section class="py-16 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 via-transparent to-blue-500/10"></div>
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-green-500/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+        <!-- Success Header -->
+        <div class="text-center mb-12">
+            <div class="w-24 h-24 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="check-circle" class="w-12 h-12 text-white"></i>
+            </div>
+            <h1 class="text-5xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-4">
+                Order Confirmed!
+            </h1>
+            <p class="text-xl text-gray-300 mb-2">
+                Thank you for your purchase
+            </p>
+            <p class="text-lg text-green-400 font-semibold">
+                Order #{{ order.orderNumber }}
+            </p>
+        </div>
+
+        <!-- Order Details -->
+        <div class="max-w-4xl mx-auto">
+            <!-- Order Summary -->
+            <div class="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border border-gray-800 shadow-2xl mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Order Info -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                            <i data-lucide="package" class="w-6 h-6 mr-3 text-green-400"></i>
+                            Order Information
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Order Number:</span>
+                                <span class="text-white font-semibold">{{ order.orderNumber }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Order Date:</span>
+                                <span class="text-white">{{ order.createdAt|date('M d, Y \\a\\t h:i A') }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Status:</span>
+                                <span class="px-3 py-1 bg-{{ order.statusColor }}-500/20 text-{{ order.statusColor }}-400 rounded-full text-sm font-medium border border-{{ order.statusColor }}-500/30">
+                                    {{ order.statusLabel }}
+                                </span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Payment Method:</span>
+                                <span class="text-white">{{ order.paymentMethod|upper }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Total Amount:</span>
+                                <span class="text-2xl font-bold text-green-400">₹{{ order.totalAmount|number_format(2) }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Info -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                            <i data-lucide="truck" class="w-6 h-6 mr-3 text-blue-400"></i>
+                            Delivery Information
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-400 text-sm">Delivering to:</p>
+                                <p class="text-white font-semibold">{{ order.shippingFullName }}</p>
+                                <p class="text-gray-300">{{ order.shippingMobile }}</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Address:</p>
+                                <p class="text-white">{{ order.shippingAddress }}</p>
+                            </div>
+                            <div class="bg-blue-500/20 border border-blue-500/50 rounded-xl p-4">
+                                <div class="flex items-center space-x-2 text-blue-300 text-sm font-medium mb-2">
+                                    <i data-lucide="clock" class="w-4 h-4"></i>
+                                    <span>Expected Delivery</span>
+                                </div>
+                                <p class="text-blue-200 text-sm">2-3 business days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border border-gray-800 shadow-2xl mb-8">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                    <i data-lucide="shopping-bag" class="w-6 h-6 mr-3 text-purple-400"></i>
+                    Order Items ({{ order.orderItems|length }})
+                </h2>
+
+                <div class="space-y-4">
+                    {% for item in order.orderItems %}
+                        <div class="bg-gray-800/50 rounded-xl p-4 border border-gray-700">
+                            <div class="flex items-center space-x-4">
+                                <!-- Product Image -->
+                                <div class="flex-shrink-0">
+                                    {% if item.productImageUrl %}
+                                        <img src="{{ item.productImageUrl }}" alt="{{ item.productName }}" class="w-16 h-16 rounded-lg object-cover">
+                                    {% else %}
+                                        <div class="w-16 h-16 bg-gray-700 rounded-lg flex items-center justify-center">
+                                            <i data-lucide="image" class="w-6 h-6 text-gray-400"></i>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Product Details -->
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-semibold text-white">{{ item.productName }}</h3>
+                                    <p class="text-gray-400 text-sm">{{ item.productDescription|slice(0, 80) }}...</p>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-purple-400 font-bold">₹{{ item.unitPrice|number_format(2) }} × {{ item.quantity }}</span>
+                                        <span class="text-white font-bold text-lg">₹{{ item.totalPrice|number_format(2) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Order Total -->
+                <div class="mt-6 pt-6 border-t border-gray-700">
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-gray-300">
+                            <span>Subtotal:</span>
+                            <span>₹{{ order.subtotal|number_format(2) }}</span>
+                        </div>
+                        <div class="flex justify-between text-gray-300">
+                            <span>Tax (GST 18%):</span>
+                            <span>₹{{ order.taxAmount|number_format(2) }}</span>
+                        </div>
+                        <div class="flex justify-between text-gray-300">
+                            <span>Shipping:</span>
+                            {% if order.shippingAmount == '0.00' %}
+                                <span class="text-green-400">FREE</span>
+                            {% else %}
+                                <span>₹{{ order.shippingAmount|number_format(2) }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="border-t border-gray-600 pt-2">
+                            <div class="flex justify-between text-white text-xl font-bold">
+                                <span>Total:</span>
+                                <span>₹{{ order.totalAmount|number_format(2) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border border-gray-800 shadow-2xl mb-8">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                    <i data-lucide="list-checks" class="w-6 h-6 mr-3 text-yellow-400"></i>
+                    What's Next?
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="package-check" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Order Processing</h3>
+                        <p class="text-gray-400 text-sm">We'll prepare your order for shipment</p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="truck" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Shipping</h3>
+                        <p class="text-gray-400 text-sm">Your order will be shipped within 24 hours</p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="home" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Delivery</h3>
+                        <p class="text-gray-400 text-sm">Delivered to your doorstep in 2-3 days</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="{{ path('app_order_detail', {'orderNumber': order.orderNumber}) }}" class="flex-1 py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl text-white font-bold text-lg text-center hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105">
+                    <span class="flex items-center justify-center space-x-2">
+                        <i data-lucide="eye" class="w-5 h-5"></i>
+                        <span>View Order Details</span>
+                    </span>
+                </a>
+                
+                <a href="{{ path('app_products') }}" class="flex-1 py-4 bg-gray-800/50 border border-gray-700 rounded-2xl text-white font-medium text-lg text-center hover:bg-gray-700/50 transition-all duration-300">
+                    <span class="flex items-center justify-center space-x-2">
+                        <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                        <span>Continue Shopping</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Lucide icons
+    if (window.initializeAllIcons) {
+        window.initializeAllIcons();
+    } else {
+        lucide.createIcons();
+    }
+    
+    // Auto-redirect to order details after 10 seconds
+    setTimeout(() => {
+        const redirectBtn = document.querySelector('a[href*="order_detail"]');
+        if (redirectBtn && !document.hidden) {
+            // Show countdown
+            const countdownEl = document.createElement('div');
+            countdownEl.className = 'fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-xl text-sm';
+            countdownEl.textContent = 'Redirecting to order details in 5 seconds...';
+            document.body.appendChild(countdownEl);
+            
+            setTimeout(() => {
+                window.location.href = redirectBtn.href;
+            }, 5000);
+        }
+    }, 10000);
+});
+</script>
+{% endblock %}

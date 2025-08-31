@@ -122,7 +122,7 @@
                                                 data-wishlist-price="{{ product.price }}"
                                                 data-wishlist-image="{{ product.imageUrl }}"
                                                 data-tooltip="Add to Wishlist"
-                                                onclick="handleWishlistToggle(this)">
+                                                onclick="toggleWishlist({{ product.id }})" data-wishlist-id="{{ product.id }}">
                                             <i data-lucide="heart" class="w-5 h-5"></i>
                                         </button>
 
@@ -144,7 +144,7 @@
                                                 data-product-price="{{ product.price }}"
                                                 data-product-image="{{ product.imageUrl }}"
                                                 data-tooltip="Quick Add to Cart"
-                                                onclick="handleQuickAddToCart(this)">
+                                                onclick="console.log('Quick add clicked for product {{ product.id }}'); addToCart({{ product.id }}, 1); return false;">
                                             <i data-lucide="shopping-cart" class="w-5 h-5"></i>
                                         </button>
 
@@ -227,12 +227,12 @@
                                                 data-product-name="{{ product.name }}"
                                                 data-product-price="{{ product.price }}"
                                                 data-product-image="{{ product.imageUrl }}"
-                                                onclick="handleQuickAddToCart(this)">
+                                                onclick="console.log('Add to cart clicked for product {{ product.id }}'); addToCart({{ product.id }}, 1); return false;">
                                             <i data-lucide="shopping-cart" class="w-4 h-4"></i>
                                             <span>Add Cart</span>
                                         </button>
 
-                                        <a href="{{ path('app_checkout', {id: product.id}) }}" class="px-4 py-3 bg-white/10 rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-300 text-sm flex items-center justify-center space-x-2 border border-white/20">
+                                        <a href="{{ path('app_buy_now', {id: product.id}) }}" class="px-4 py-3 bg-white/10 rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-300 text-sm flex items-center justify-center space-x-2 border border-white/20">
                                             <i data-lucide="zap" class="w-4 h-4"></i>
                                             <span>Buy Now</span>
                                         </a>
@@ -287,6 +287,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Lucide Icons
     lucide.createIcons();
+
+    // Test add to cart function
+    console.log('🛒 Testing addToCart function availability:', typeof window.addToCart);
+    if (typeof window.addToCart !== 'function') {
+        console.error('🛒 addToCart function not available on page load');
+    }
 
     // Enhanced Product Filtering
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -370,15 +376,14 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             this.disabled = true;
 
-            // Simulate API call
-            setTimeout(() => {
-                // Add to cart using B2Battle system
-                if (window.B2Battle?.cart) {
-                    window.B2Battle.cart.addItem(productId, productName, productPrice, 1, productImage);
-                } else {
-                    // Fallback
-                    addToCart(productId, productName, productPrice, 1, productImage);
-                }
+            // Add to cart using our cart system
+            console.log('🛒 Adding product to cart:', productId);
+            if (typeof window.addToCart === 'function') {
+                window.addToCart(productId, 1);
+            } else {
+                console.error('🛒 addToCart function not found');
+                alert('Add to cart function not available. Please refresh the page.');
+            }
 
                 // Success state
                 this.innerHTML = `
@@ -591,7 +596,11 @@ function showQuickViewModal(productId, productName, productPrice, productImage, 
     });
 
     // Initialize icons and animate in
-    lucide.createIcons();
+    if (window.initializeAllIcons) {
+        window.initializeAllIcons();
+    } else {
+        lucide.createIcons();
+    }
     setTimeout(() => {
         modal.querySelector('.glass-morphism').style.transform = 'scale(1)';
         modal.querySelector('.glass-morphism').style.opacity = '1';

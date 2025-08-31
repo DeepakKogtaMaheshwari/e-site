@@ -1,0 +1,199 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Addresses - {{ user.fullName }} | B2Battle{% endblock %}
+
+{% block body %}
+<!-- Addresses Header -->
+<section class="py-16 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 via-transparent to-blue-500/10"></div>
+    <div class="absolute top-0 right-1/4 w-64 h-64 bg-green-500/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-4">
+                My Addresses
+            </h1>
+            <p class="text-xl text-gray-300">
+                Manage your delivery addresses
+            </p>
+        </div>
+
+        <!-- Address Management -->
+        <div class="max-w-4xl mx-auto">
+            <!-- Current Address -->
+            <div class="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border border-gray-800 shadow-2xl mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center">
+                        <i data-lucide="map-pin" class="w-6 h-6 mr-3 text-green-400"></i>
+                        Primary Delivery Address
+                    </h2>
+                    <a href="{{ path('app_profile_edit') }}" class="px-4 py-2 bg-green-500/20 text-green-400 rounded-xl font-medium hover:bg-green-500/30 transition-all duration-300">
+                        <i data-lucide="edit" class="w-4 h-4 inline mr-2"></i>
+                        Edit Address
+                    </a>
+                </div>
+
+                <!-- Address Card -->
+                <div class="bg-gray-800/50 rounded-2xl p-6 border border-gray-700">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Personal Info -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                <i data-lucide="user" class="w-5 h-5 mr-2 text-blue-400"></i>
+                                Contact Information
+                            </h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <p class="text-gray-400 text-sm">Full Name</p>
+                                    <p class="text-white font-medium">{{ user.fullName }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-sm">Mobile Number</p>
+                                    <p class="text-white font-medium">+91 {{ user.mobile }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-sm">Email Address</p>
+                                    <p class="text-white font-medium">{{ user.email }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Address Info -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                <i data-lucide="home" class="w-5 h-5 mr-2 text-green-400"></i>
+                                Delivery Address
+                            </h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <p class="text-gray-400 text-sm">Street Address</p>
+                                    <p class="text-white">{{ user.streetAddress }}</p>
+                                </div>
+                                {% if user.landmark %}
+                                <div>
+                                    <p class="text-gray-400 text-sm">Landmark</p>
+                                    <p class="text-white">{{ user.landmark }}</p>
+                                </div>
+                                {% endif %}
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-gray-400 text-sm">City</p>
+                                        <p class="text-white">{{ user.city }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">State</p>
+                                        <p class="text-white">{{ user.state }}</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-gray-400 text-sm">Postal Code</p>
+                                        <p class="text-white">{{ user.postalCode }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">Country</p>
+                                        <p class="text-white">{{ user.country }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Full Address Display -->
+                    <div class="mt-6 pt-6 border-t border-gray-700">
+                        <h4 class="text-sm font-medium text-gray-400 mb-2">Complete Address</h4>
+                        <div class="bg-gray-900/50 rounded-xl p-4 border border-gray-600">
+                            <p class="text-white leading-relaxed">{{ user.formattedAddress }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Features -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-800 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="truck" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Fast Delivery</h3>
+                    <p class="text-gray-400 text-sm">Get your orders delivered within 24-48 hours to this address</p>
+                </div>
+
+                <div class="bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-800 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Secure Delivery</h3>
+                    <p class="text-gray-400 text-sm">Your address information is encrypted and secure</p>
+                </div>
+
+                <div class="bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-800 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="phone" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Delivery Updates</h3>
+                    <p class="text-gray-400 text-sm">Get SMS and email updates about your delivery status</p>
+                </div>
+            </div>
+
+            <!-- Address Actions -->
+            <div class="bg-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-800">
+                <h3 class="text-xl font-semibold text-white mb-4">Address Management</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="{{ path('app_profile_edit') }}" class="flex items-center justify-center space-x-3 py-4 bg-green-500/20 text-green-400 rounded-xl font-medium hover:bg-green-500/30 transition-all duration-300">
+                        <i data-lucide="edit" class="w-5 h-5"></i>
+                        <span>Update Address</span>
+                    </a>
+                    
+                    <a href="{{ path('app_profile') }}" class="flex items-center justify-center space-x-3 py-4 bg-blue-500/20 text-blue-400 rounded-xl font-medium hover:bg-blue-500/30 transition-all duration-300">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                        <span>Back to Profile</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Delivery Information -->
+            <div class="mt-8 bg-gray-900/50 rounded-2xl p-6 border border-gray-800">
+                <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
+                    <i data-lucide="info" class="w-5 h-5 mr-2 text-yellow-400"></i>
+                    Delivery Information
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    <div>
+                        <h4 class="text-white font-medium mb-2">Delivery Areas</h4>
+                        <ul class="text-gray-400 space-y-1">
+                            <li>• We deliver across {{ user.state }}</li>
+                            <li>• Same-day delivery in {{ user.city }}</li>
+                            <li>• Free delivery on orders above ₹500</li>
+                            <li>• Express delivery available</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium mb-2">Delivery Times</h4>
+                        <ul class="text-gray-400 space-y-1">
+                            <li>• Standard: 2-3 business days</li>
+                            <li>• Express: 1-2 business days</li>
+                            <li>• Same-day: Order before 2 PM</li>
+                            <li>• Weekend delivery available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Lucide icons
+    if (window.initializeAllIcons) {
+        window.initializeAllIcons();
+    } else {
+        lucide.createIcons();
+    }
+});
+</script>
+{% endblock %}
